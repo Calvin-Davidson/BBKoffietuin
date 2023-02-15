@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.settings {
+    width: 100%;
+    height: 150px;
+    background-color: #f1f1f1;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.inputWrapper span {
+    display: block;
+    width: 100%;
+}
+
+.inputWrapper input {
+    width: 150px;
+    height: 20px;
+}
+
+.settings-container {
+    padding: 12.5px;
+}
+
+.settings-container button,
+.settings-container input {
+    width: 250px;
+}
+
+.map-container {
+    padding-top: 50px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#map {
+    width: 900px;
+    height: 900px;
+}
+
+.input-field-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}

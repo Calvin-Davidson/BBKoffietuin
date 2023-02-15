@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Map</title>
+    <link rel="stylesheet" href="./Styles/style.css">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <div class="settings">
+
+            <div class="settings-container">
+                <!-- Width, Height -->
+                <div class="input-field-wrapper">
+
+                    <div class="inputWrapper">
+                        <span>Width</span>
+                        <input id="input_width" type="number" min=2 onchange="applyChangeWidth(makePowerOfTwo(this))"
+                            value="512">
+                    </div>
+
+                    <div class="inputWrapper">
+                        <span>Height</span>
+                        <input id="input_height" type="number" min=2 onchange="applyChangeHeight(makePowerOfTwo(this))"
+                            value="512">
+                    </div>
+
+                    <div class="inputWrapper">
+                        <span>Zoom</span>
+                        <input id="input_zoom" type="number" min=0 onchange="onZoomInputChange(this)" value="14">
+                    </div>
+
+                </div>
+                <br>
+                <!-- Download -->
+                <div>
+                    <button id="DownloadImageButton">Download</button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="map-container">
+            <div id="map" data_width="512" data_height="512"></div>
+        </div>
+    </div>
+
+    <!-- helpers methods etc.. -->
+    <script src=" ./Scripts/MarkerIconGenerators/pointMarker.js"> </script>
+
+    <!-- map -->
+    <script src="./Scripts/map.js"></script>
+
+    <!-- API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=PLACE_API_KEY_HERE&callback=initMap"></script>
+
+    <!-- Handlers -->
+    <script src="./Scripts/main.js"></script>
+    <script src="./Scripts/downloader.js"></script>
+
+
+</body>
+
+</html>
