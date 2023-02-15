@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .settings {
+            width: 100%;
+            height: 150px;
+            background-color: #f1f1f1;
+
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .inputWrapper {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .inputWrapper span {
+            display: block;
+            width: 100%;
+        }
+
+        .inputWrapper input {
+            width: 150px;
+            height: 20px;
+        }
+
+        .settings-container {
+            padding: 12.5px;
+        }
+
+        .settings-container button,
+        .settings-container input {
+            width: 250px;
+        }
+
+        .map-container {
+            padding-top: 50px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #map {
+            width: 900px;
+            height: 900px;
+        }
+
+        .input-field-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <div class="settings">
+
+            <div class="settings-container">
+                <!-- Width, Height -->
+                <div class="input-field-wrapper">
+
+                    <div class="inputWrapper">
+                        <span>Width</span>
+                        <input id="input_width" type="number" min=2 onchange="applyChangeWidth(validate(this))"
+                            value="512">
+                    </div>
+
+                    <div class="inputWrapper">
+                        <span>Height</span>
+                        <input id="input_height" type="number" min=2 onchange="applyChangeHeight(validate(this))"
+                            value="512">
+                    </div>
+
+                    <div class="inputWrapper">
+                        <span>Zoom</span>
+                        <input id="input_zoom" type="number" min=0 onchange="onZoomInputChange(this)" value="14">
+                    </div>
+
+                </div>
+                <br>
+                <!-- Download -->
+                <div>
+                    <button id="DownloadImageButton">Download</button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="map-container">
+            <div id="map" data_width="512" data_height="512"></div>
+        </div>
+    </div>
+
+    <script src="./PointGeneration.js"></script>
+    <script src="./map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA--TK3eFeoKElqmaynPIF9QvoK1-HnpXg&callback=initMap""></script>
+    <script src=" ./Download.js"></script>
+     <script>
+        var start_width = 512
+        var start_height = 512;
+        let input_width = document.getElementById('input_width');
+        let input_height = document.getElementById('input_height');
+        let input_zoom = document.getElementById('input_zoom');
+        let mapHtmlReference = document.getElementById('map');
+
+        input_width.value = start_width;
+        input_height.value = start_height;
+        mapHtmlReference.style.width = start_width + "px";
+        mapHtmlReference.style.height = start_height + "px";
+
+
+        function applyChangeWidth(num) {
+            input_width.value = num;
+            mapHtmlReference.style.width = num + "px";
+
+            SetupMap();
+        }
+
+        function applyChangeHeight(num) {
+            input_height.value = num;
+            mapHtmlReference.style.height = num + "px";
+
+            SetupMap();
+        }
+
+
+        function validate(input) {
+            var number = input.value;
+            var valid = number % 2 == 0;
+            if (!valid) number++;
+            return number;
+        }
+
+        function onZoomInputChange(input) {
+            map.setZoom(parseInt(input.value));
+        }
+
+        //keep track of the zoom
+        google.maps.event.addListener(map, 'zoom_changed', function () {
+            // Call your function here to do something when the zoom level changes
+            input_zoom.value = map.getZoom();
+        });
+    </script>
+</body>
+
+</html>
