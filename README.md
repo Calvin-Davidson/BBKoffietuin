@@ -9,10 +9,16 @@ Een complete en uitgebreide beschrijving komt in het functioneel ontwerp (onderd
 
 # Geproduceerde Game Onderdelen
 
-Calvin:
-Emile:
-Wouter:
-Vivian:
-Sterre:
-Leihko:
-Larhona:
+Calvin: Lead developer
+
+Emile: Developer
+
+Wouter: Notulist
+
+Vivian: Scrum master
+
+Sterre: Lead artist
+
+Leihko: Project owner
+
+Larhona: Artist
