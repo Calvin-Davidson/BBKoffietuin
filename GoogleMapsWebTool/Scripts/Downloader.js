@@ -45,7 +45,6 @@ function Draw() {
                 returnVal.zoom = this.getMap().getZoom();
                 if (wantsDownload) {
                     wantsDownload = false;
-                    console.log("downloading");
                     downloadObjectAsJson(returnVal, "map");
                 }
 
