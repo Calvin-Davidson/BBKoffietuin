@@ -247,11 +247,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gpsServiceStarter: {fileID: 923083306}
-  latitudeText: {fileID: 0}
-  longitudeText: {fileID: 0}
-  altitudeText: {fileID: 0}
-  horizontalAccuracyText: {fileID: 0}
-  timestampText: {fileID: 0}
+  latitudeText: {fileID: 1840855963}
+  longitudeText: {fileID: 908280670}
+  altitudeText: {fileID: 1363362645}
+  horizontalAccuracyText: {fileID: 1867798725}
+  timestampText: {fileID: 968642496}
 --- !u!114 &771984043
 MonoBehaviour:
   m_ObjectHideFlags: 0

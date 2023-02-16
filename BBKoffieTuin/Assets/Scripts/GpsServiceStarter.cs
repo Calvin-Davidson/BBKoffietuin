@@ -44,7 +44,7 @@ public class GpsServiceStarter : MonoBehaviour
         }
 
         // Start service before querying location
-        Input.location.Start(500f, 500f);
+        Input.location.Start();
 
         // Wait until service initializes
         while (Input.location.status == LocationServiceStatus.Initializing && maxWaitInSeconds > 0)
