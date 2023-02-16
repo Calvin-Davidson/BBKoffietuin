@@ -9,14 +9,34 @@ public class GpsServiceStarter : MonoBehaviour
 
     public UnityEvent onLocationServicesStarted = new UnityEvent();
     public bool GpsServiceEnabled { get; private set; } = false;
+
+    private bool _hasFineLocationPermission = false;
+    private PermissionCallbacks _permissionCallbacks;
     
     IEnumerator Start()
     {
-        //Request permission if we don't have it.
-        if (!Permission.HasUserAuthorizedPermission(Permission.CoarseLocation)) {
-            Permission.RequestUserPermission(Permission.CoarseLocation);
+        //handle permission
+        _hasFineLocationPermission = Permission.HasUserAuthorizedPermission(Permission.FineLocation);
+        
+        //WE HAVE PERMISSION SO WE CAN START THE SERVICE
+        if (_hasFineLocationPermission)
+        {
+            StartCoroutine(StartLocationServices());
+            yield break;
         }
+        
+        //WE DON'T HAVE PERMISSION SO WE REQUEST IT AND START SERVICES ON GRANTED.
+        _permissionCallbacks.PermissionGranted += s => { StartCoroutine(StartLocationServices()); };
 
+        _permissionCallbacks.PermissionDenied += s => { };
+
+        _permissionCallbacks.PermissionDeniedAndDontAskAgain += s => { };
+            
+        Permission.RequestUserPermission(Permission.FineLocation, _permissionCallbacks);
+    }
+
+    public IEnumerator StartLocationServices()
+    {
         // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser) {
             Debug.LogFormat("Android and Location not enabled");
@@ -62,7 +82,7 @@ public class GpsServiceStarter : MonoBehaviour
 
         GpsServiceEnabled = true;
         onLocationServicesStarted.Invoke();
-        
+
         // Stop service if there is no need to query location updates continuously
         // Input.location.Stop();
     }

@@ -16,9 +16,9 @@ public class GpsDebugUserInterface : MonoBehaviour
         if (!gpsServiceStarter.GpsServiceEnabled) return;
 
         latitudeText.text = "latitude: " + Input.location.lastData.latitude;
-        latitudeText.text = "longitude: " + Input.location.lastData.longitude;
-        latitudeText.text = "altitude: " + Input.location.lastData.altitude;
-        latitudeText.text = "horizontalAccuracy: " + Input.location.lastData.horizontalAccuracy;
-        latitudeText.text = "timestamp: " + Input.location.lastData.timestamp;
+        longitudeText.text = "longitude: " + Input.location.lastData.longitude;
+        altitudeText.text = "altitude: " + Input.location.lastData.altitude;
+        horizontalAccuracyText.text = "horizontalAccuracy: " + Input.location.lastData.horizontalAccuracy;
+        timestampText.text = "timestamp: " + Input.location.lastData.timestamp;
     }
 }
