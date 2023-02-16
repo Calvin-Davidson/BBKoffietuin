@@ -6,15 +6,15 @@ public class GpsDebugUserInterface : MonoBehaviour
 {
     [SerializeField] private GpsService gpsService;
 
-    public TMP_Text latitudeText;
-    public TMP_Text longitudeText;
-    public TMP_Text altitudeText;
-    public TMP_Text horizontalAccuracyText;
-    public TMP_Text timestampText;
+    [SerializeField] private TMP_Text latitudeText;
+    [SerializeField] private TMP_Text longitudeText;
+    [SerializeField] private TMP_Text altitudeText;
+    [SerializeField] private TMP_Text horizontalAccuracyText;
+    [SerializeField] private TMP_Text timestampText;
 
     private void Update()
     {
-        if (!gpsService.GpsServiceEnabled) return;
+        if (!GpsService.Instance.GpsServiceEnabled) return;
 
         latitudeText.text = "latitude: " + Input.location.lastData.latitude;
         longitudeText.text = "longitude: " + Input.location.lastData.longitude;

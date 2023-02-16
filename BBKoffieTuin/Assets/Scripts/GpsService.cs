@@ -1,18 +1,23 @@
 using System.Collections;
+using Toolbox.Utilities;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Events;
 
-public class GpsService : MonoBehaviour
+public class GpsService : MonoSingleton<GpsService>
 {
+    //variable declaration
     [SerializeField] private int maxWaitInSeconds = 15;
-
-    public UnityEvent onLocationServicesStarted = new UnityEvent();
-    public bool GpsServiceEnabled { get; private set; } = false;
-
+    
     private bool _hasFineLocationPermission = false;
     private PermissionCallbacks _permissionCallbacks;
     
+    //events
+    public UnityEvent onLocationServicesStarted = new UnityEvent();
+    
+    //getters and setters
+    public bool GpsServiceEnabled { get; private set; } = false;
+
     IEnumerator Start()
     {
         //handle permission
@@ -25,7 +30,6 @@ public class GpsService : MonoBehaviour
             yield break;
         }
 
-        _permissionCallbacks = new PermissionCallbacks();
         //WE DON'T HAVE PERMISSION SO WE REQUEST IT AND START SERVICES ON GRANTED.
         _permissionCallbacks = new PermissionCallbacks();
         

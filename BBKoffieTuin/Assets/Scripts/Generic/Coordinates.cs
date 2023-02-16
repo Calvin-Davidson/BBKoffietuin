@@ -26,8 +26,25 @@ namespace Generic
             this.longitude = longitude;
             this.altitude = altitude;
         }
-        
-        //make a function to calculate distance to another coordinates
+
+        /// <summary>
+        /// Calculates the distance between two coordinates in kilometers
+        /// </summary>
+        /// <param name="coordinates"></param>
+        /// <param name="unit">Can be K for kilometers, N for Nautical miles, M for miles</param>
+        /// <returns></returns>
+        public double DistanceTo(Coordinates coordinates, char unit = 'K')
+        {
+            return DistanceTo(coordinates.latitude, coordinates.longitude, unit);
+        }
+
+        /// <summary>
+        /// Calculates the distance between two coordinates in kilometers
+        /// </summary>
+        /// <param name="toLat"></param>
+        /// <param name="toLon"></param>
+        /// <param name="unit">Can be K for kilometers, N for Nautical miles, M for miles</param>
+        /// <returns></returns>
         public double DistanceTo(double toLat, double toLon, char unit = 'K')
         {
             double rlat1 = Math.PI*latitude/180;

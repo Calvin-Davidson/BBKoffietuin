@@ -5,14 +5,14 @@ namespace Route
 {
     public class RouteHandler : MonoBehaviour
     {
+        private Route _activeRoute = null;
+        private readonly float _distanceInMetersForTrigger = 10;
+        
         public UnityEvent<RoutePoint, int> onNextPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent<RoutePoint, int> onFurtherPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent<RoutePoint, int> onAlreadyReachedPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent<RoutePoint, int> onPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent onRouteChanged = new UnityEvent();
-        
-        private Route _activeRoute = null;
-        private readonly float _distanceInMetersForTrigger = 10;
 
         private void Awake()
         {
