@@ -37,8 +37,8 @@ namespace Route
                       pointName  = "A",
                       Coordinates = new Coordinates()
                       {
-                          latitude = 52.39152,
-                          longitude = 4.857674
+                          latitude = 52.390652,
+                          longitude = 4.856711
                       }
                     },
                     new RoutePoint()
@@ -46,8 +46,8 @@ namespace Route
                         pointName  = "B",
                         Coordinates = new Coordinates()
                         {
-                            latitude = 52.3913,
-                            longitude = 4.857858
+                            latitude = 52.390283,
+                            longitude = 4.855105
                         }
                     },
                     new RoutePoint()
@@ -55,8 +55,62 @@ namespace Route
                         pointName  = "C",
                         Coordinates = new Coordinates()
                         {
-                            latitude = 52.39152,
-                            longitude = 4.857677
+                            latitude = 52.390256,
+                            longitude = 4.853196
+                        }
+                    },
+                    new RoutePoint()
+                    {
+                        pointName  = "D",
+                        Coordinates = new Coordinates()
+                        {
+                            latitude = 52.389640,
+                            longitude = 4.851188
+                        }
+                    },
+                    new RoutePoint()
+                    {
+                        pointName  = "E",
+                        Coordinates = new Coordinates()
+                        {
+                            latitude = 52.389582,
+                            longitude = 4.849565
+                        }
+                    },
+                    new RoutePoint()
+                    {
+                        pointName  = "F",
+                        Coordinates = new Coordinates()
+                        {
+                            latitude = 52.389521,
+                            longitude = 4.846371
+                        }
+                    },
+                    new RoutePoint()
+                    {
+                        pointName  = "G",
+                        Coordinates = new Coordinates()
+                        {
+                            latitude = 52.389477,
+                            longitude = 4.841773
+                        }
+                    },
+                    new RoutePoint()
+                    {
+                        pointName  = "H",
+                        Coordinates = new Coordinates()
+                        {
+                            latitude = 52.389513,
+                            longitude = 4.839421
+                        }
+                    },
+                    new RoutePoint()
+                    {
+                        pointName  = "I",
+                        Coordinates = new Coordinates()
+                        {
+                            latitude = 52.389162,
+                            longitude = 4.838407
                         }
                     },
                 }
