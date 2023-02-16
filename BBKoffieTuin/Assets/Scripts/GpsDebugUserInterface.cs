@@ -1,9 +1,10 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GpsDebugUserInterface : MonoBehaviour
 {
-    [SerializeField] private GpsServiceStarter gpsServiceStarter;
+    [SerializeField] private GpsService gpsService;
 
     public TMP_Text latitudeText;
     public TMP_Text longitudeText;
@@ -13,7 +14,7 @@ public class GpsDebugUserInterface : MonoBehaviour
 
     private void Update()
     {
-        if (!gpsServiceStarter.GpsServiceEnabled) return;
+        if (!gpsService.GpsServiceEnabled) return;
 
         latitudeText.text = "latitude: " + Input.location.lastData.latitude;
         longitudeText.text = "longitude: " + Input.location.lastData.longitude;

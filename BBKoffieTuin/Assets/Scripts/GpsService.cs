@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Events;
 
-public class GpsServiceStarter : MonoBehaviour
+public class GpsService : MonoBehaviour
 {
     [SerializeField] private int maxWaitInSeconds = 15;
 
@@ -26,6 +26,8 @@ public class GpsServiceStarter : MonoBehaviour
         }
         
         //WE DON'T HAVE PERMISSION SO WE REQUEST IT AND START SERVICES ON GRANTED.
+        _permissionCallbacks = new PermissionCallbacks();
+        
         _permissionCallbacks.PermissionGranted += s => { StartCoroutine(StartLocationServices()); };
 
         _permissionCallbacks.PermissionDenied += s => { };
@@ -44,7 +46,7 @@ public class GpsServiceStarter : MonoBehaviour
         }
 
         // Start service before querying location
-        Input.location.Start(500f, 500f);
+        Input.location.Start();
 
         // Wait until service initializes
         while (Input.location.status == LocationServiceStatus.Initializing && maxWaitInSeconds > 0)
@@ -82,8 +84,11 @@ public class GpsServiceStarter : MonoBehaviour
 
         GpsServiceEnabled = true;
         onLocationServicesStarted.Invoke();
-
-        // Stop service if there is no need to query location updates continuously
-        // Input.location.Stop();
+    }
+    
+    public void StopLocationServices()
+    {
+        Input.location.Stop();
+        GpsServiceEnabled = false;
     }
 }
