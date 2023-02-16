@@ -24,7 +24,8 @@ public class GpsService : MonoBehaviour
             StartCoroutine(StartLocationServices());
             yield break;
         }
-        
+
+        _permissionCallbacks = new PermissionCallbacks();
         //WE DON'T HAVE PERMISSION SO WE REQUEST IT AND START SERVICES ON GRANTED.
         _permissionCallbacks = new PermissionCallbacks();
         
