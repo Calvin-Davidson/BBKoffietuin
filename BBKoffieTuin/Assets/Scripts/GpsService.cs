@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Toolbox.Utilities;
 using UnityEngine;
@@ -30,14 +31,36 @@ public class GpsService : MonoSingleton<GpsService>
             yield break;
         }
 
+
+    }
+
+    public void RequestPermission(Action permissionAlreadyGranted, Action permissionGrantedCallback, Action permissionDeniedCallback, Action permissionDeniedAndDontAskAgainCallback, bool startLocationServices = true)
+    {
+        _hasFineLocationPermission = Permission.HasUserAuthorizedPermission(Permission.FineLocation);
+        if (_hasFineLocationPermission)
+        {
+            permissionAlreadyGranted?.Invoke();
+            return;
+        }
         //WE DON'T HAVE PERMISSION SO WE REQUEST IT AND START SERVICES ON GRANTED.
         _permissionCallbacks = new PermissionCallbacks();
         
-        _permissionCallbacks.PermissionGranted += s => { StartCoroutine(StartLocationServices()); };
+        _permissionCallbacks.PermissionGranted += s =>
+        {
+            if(startLocationServices) StartCoroutine(StartLocationServices());
+            permissionGrantedCallback.Invoke();
+        };
 
-        _permissionCallbacks.PermissionDenied += s => { };
+        _permissionCallbacks.PermissionDenied += s =>
+        {
+            
+            permissionDeniedCallback.Invoke();
+        };
 
-        _permissionCallbacks.PermissionDeniedAndDontAskAgain += s => { };
+        _permissionCallbacks.PermissionDeniedAndDontAskAgain += s =>
+        {
+            permissionDeniedAndDontAskAgainCallback.Invoke();
+        };
             
         Permission.RequestUserPermission(Permission.FineLocation, _permissionCallbacks);
     }
