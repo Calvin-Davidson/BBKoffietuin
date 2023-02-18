@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Generic;
+using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Route
 {
@@ -8,17 +11,31 @@ namespace Route
         /// <summary>
         /// Create a route from a json string.
         /// </summary>
-        public static void CreateRouteFromJson()
+        public static Route CreateRouteFromJson(string json)
         {
-            //todo: implement this.
+            try
+            {
+                return JsonConvert.DeserializeObject<Route>(json);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
         
         /// <summary>
         /// Creates json from route object using json.net
         /// </summary>
-        public static void CreateJsonFromRoute()
+        public static string CreateJsonFromRoute(Route route)
         {
-            //todo: implement this.
+            try
+            {
+                return JsonConvert.SerializeObject(route);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         /// <summary>
