@@ -72,11 +72,9 @@ namespace Route
                 if (string.IsNullOrEmpty(base64Image)) return null;
 
                 //create it from the base64 string and cache it.
-                byte[] imageBytes = Convert.FromBase64String(base64Image);
-                Texture2D tex = new Texture2D(2, 2);
-                tex.LoadImage(imageBytes);
-                Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f),
-                    100.0f);
+                Texture2D tex = (Texture2D) ImageTexture;
+                if (tex == null) return null;
+                Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
 
                 _imageSprite = sprite;
                 return sprite;
