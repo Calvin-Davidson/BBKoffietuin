@@ -49,7 +49,7 @@ namespace Toolbox.Utilities
         /// start logic
         /// if the game starts and this component is not the instance of the static instance we remove it because a singleton can only have one 
         /// </summary>
-        private void Awake()
+        public virtual void Awake()
         {
             if (_instance != null && _instance != this)
             {

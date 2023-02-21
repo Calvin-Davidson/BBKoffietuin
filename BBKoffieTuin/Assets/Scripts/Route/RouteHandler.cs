@@ -22,6 +22,7 @@ namespace Route
         public void Update()
         {
             if (_activeRoute == null) return;
+            if (GpsService.Instance.GpsServiceEnabled == false) return;
 
             //the route is not null, so we can check if we are close to a point.
 

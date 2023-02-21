@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Toolbox.Utilities;
 using UnityEngine;
@@ -8,44 +9,78 @@ public class GpsService : MonoSingleton<GpsService>
 {
     //variable declaration
     [SerializeField] private int maxWaitInSeconds = 15;
-    
+
     private bool _hasFineLocationPermission = false;
     private PermissionCallbacks _permissionCallbacks;
-    
+
     //events
     public UnityEvent onLocationServicesStarted = new UnityEvent();
-    
+
     //getters and setters
     public bool GpsServiceEnabled { get; private set; } = false;
 
-    IEnumerator Start()
+
+    public override void Awake()
     {
-        //handle permission
+        base.Awake();
         _hasFineLocationPermission = Permission.HasUserAuthorizedPermission(Permission.FineLocation);
-        
-        //WE HAVE PERMISSION SO WE CAN START THE SERVICE
+    }
+
+    
+    public void TryStartingLocationServices(Action startedCallback = null, Action noPermissionCallback = null,  Action errorCallback = null)
+    {
+        RequestLocationPermission(() =>
+        {
+            StartLocationServices(() =>
+            {
+                startedCallback?.Invoke();
+            }, () =>
+            {
+             errorCallback?.Invoke();   
+            });
+        }, () =>
+        {
+            noPermissionCallback?.Invoke();
+            errorCallback?.Invoke();
+        });
+    }
+    
+    public void StartLocationServices(Action startedCallback = null, Action errorCallback = null)
+    {
+        StartCoroutine(StartLocationServicesEnumerator(startedCallback, errorCallback));
+    }
+    
+    /// <summary>
+    /// Makes sure that the user has given permission to use the GPS 
+    /// </summary>
+    /// <param name="onPermissionConfirmed"></param>
+    /// <param name="onPermissionDenied"></param>
+    public void RequestLocationPermission(Action onPermissionConfirmed, Action onPermissionDenied)
+    {
+        //CHECK IF WE ALREADY HAVE PERMISSION
+        _hasFineLocationPermission = Permission.HasUserAuthorizedPermission(Permission.FineLocation);
         if (_hasFineLocationPermission)
         {
-            StartCoroutine(StartLocationServices());
-            yield break;
+            onPermissionConfirmed?.Invoke();
+            return;
         }
 
         //WE DON'T HAVE PERMISSION SO WE REQUEST IT AND START SERVICES ON GRANTED.
         _permissionCallbacks = new PermissionCallbacks();
-        
-        _permissionCallbacks.PermissionGranted += s => { StartCoroutine(StartLocationServices()); };
 
-        _permissionCallbacks.PermissionDenied += s => { };
+        _permissionCallbacks.PermissionGranted += s => { onPermissionConfirmed.Invoke(); };
+        _permissionCallbacks.PermissionDenied += s => { onPermissionDenied.Invoke(); };
+        _permissionCallbacks.PermissionDeniedAndDontAskAgain += s => { onPermissionDenied.Invoke(); };
 
-        _permissionCallbacks.PermissionDeniedAndDontAskAgain += s => { };
-            
         Permission.RequestUserPermission(Permission.FineLocation, _permissionCallbacks);
     }
 
-    public IEnumerator StartLocationServices()
+    private IEnumerator StartLocationServicesEnumerator(Action startedCallback = null, Action errorCallback = null)
     {
         // First, check if user has location service enabled
-        if (!Input.location.isEnabledByUser) {
+        if (!Input.location.isEnabledByUser)
+        {
+            errorCallback?.Invoke();
             Debug.LogFormat("Android and Location not enabled");
             yield break;
         }
@@ -63,6 +98,7 @@ public class GpsService : MonoSingleton<GpsService>
         // Service didn't initialize in 15 seconds
         if (maxWaitInSeconds < 1)
         {
+            errorCallback?.Invoke();
             Debug.LogFormat("Timed out");
             yield break;
         }
@@ -70,18 +106,10 @@ public class GpsService : MonoSingleton<GpsService>
         // Connection has failed
         if (Input.location.status != LocationServiceStatus.Running)
         {
+            errorCallback?.Invoke();
             Debug.LogFormat("Unable to determine device location. Failed with status {0}", Input.location.status);
             yield break;
         }
-
-        Debug.LogFormat("Location service live. status {0}", Input.location.status);
-        // Access granted and location value could be retrieved
-        Debug.LogFormat("Location: "
-                        + Input.location.lastData.latitude + " "
-                        + Input.location.lastData.longitude + " "
-                        + Input.location.lastData.altitude + " "
-                        + Input.location.lastData.horizontalAccuracy + " "
-                        + Input.location.lastData.timestamp);
 
         float latitude = Input.location.lastData.latitude;
         float longitude = Input.location.lastData.longitude;
@@ -89,8 +117,9 @@ public class GpsService : MonoSingleton<GpsService>
 
         GpsServiceEnabled = true;
         onLocationServicesStarted.Invoke();
+        startedCallback?.Invoke();
     }
-    
+
     public void StopLocationServices()
     {
         Input.location.Stop();
