@@ -31,21 +31,16 @@ public class GpsService : MonoSingleton<GpsService>
     {
         RequestLocationPermission(() =>
         {
-            StartLocationServices(() =>
-            {
-                startedCallback?.Invoke();
-            }, () =>
-            {
-             errorCallback?.Invoke();   
-            });
+            StartLocationServices(startedCallback, errorCallback);
         }, () =>
         {
             noPermissionCallback?.Invoke();
             errorCallback?.Invoke();
         });
     }
-    
-    public void StartLocationServices(Action startedCallback = null, Action errorCallback = null)
+
+
+    private void StartLocationServices(Action startedCallback = null, Action errorCallback = null)
     {
         StartCoroutine(StartLocationServicesEnumerator(startedCallback, errorCallback));
     }

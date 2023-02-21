@@ -43,17 +43,17 @@ namespace Route
             //Before we can start we have to make sure we have GPS permission!
             GpsService.Instance.TryStartingLocationServices(() =>
             {
+                //START THE ROUTE!
                 RouteHandler.Instance.ActiveRoute = Route;
                 MenuHandler.Instance.OpenRouteMenu();
-                //START THE ROUTE!
             }, () =>
             {
-                Debug.Log("NO GPS PERMISSION CAN'T START");
                 //NO PERMISSION!
+                Debug.Log("NO GPS PERMISSION CAN'T START");
             }, () =>
             {
-                Debug.Log("SOMETHING WENT WRONG!");
                 //SOMETHING WENT WRONG IN GENERAL!
+                Debug.Log("SOMETHING WENT WRONG!");
             });
         }
 

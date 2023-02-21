@@ -42,7 +42,7 @@ namespace Route
                 if (HasReachedPoint(currentLat, currentLong, triggeredPoint)) continue;
                 triggeredPoint.isTriggered = false;
             }
-
+            
             //check if we reached the point and if we weren't already on it.
             if (HasReachedPoint(currentLat, currentLong, nextPoint) && !nextPoint.isTriggered)
             {
