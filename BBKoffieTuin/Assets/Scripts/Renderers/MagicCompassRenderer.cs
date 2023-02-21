@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,8 @@ namespace Renderers
         [SerializeField] private Image northPointer;
         [SerializeField] private Image magicPointer;
         [SerializeField] private PhoneDirection phoneDirection;
-
+        [SerializeField] private TextMeshProUGUI debugText1;
+        [SerializeField] private TextMeshProUGUI debugText2;
 
         private void Start()
         {
@@ -19,18 +21,14 @@ namespace Renderers
 
         private void RenderNortherPoint(float newRotation)
         {
-            Quaternion currentRot = northPointer.transform.rotation;
-            currentRot.z = newRotation;
-
-            northPointer.transform.rotation = currentRot;
+            northPointer.rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,newRotation));
+            debugText1.text = newRotation.ToString();
         }
         
         private void RenderMagicPoint(float newRotation)
         {
-            Quaternion currentRot = magicPointer.transform.rotation;
-            currentRot.z = newRotation;
-
-            magicPointer.transform.rotation = currentRot;
+            magicPointer.rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,newRotation));;
+            debugText2.text = newRotation.ToString();
         }
     }
 }
