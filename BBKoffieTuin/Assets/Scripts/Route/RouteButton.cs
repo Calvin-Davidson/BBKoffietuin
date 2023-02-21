@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,8 @@ namespace Route
     /// </summary>
     public class RouteButton : MonoBehaviour
     {
-        [SerializeField] private string routeJson;
+        [SerializeField] private TextAsset textAsset; //first option
+        [SerializeField] private string routeJson; //second option
         private Route _route;
 
         /// <summary>
@@ -19,17 +21,16 @@ namespace Route
         /// </summary>
         private void Awake()
         {
-            GUIUtility.systemCopyBuffer = JsonConvert.SerializeObject(RouteHelper.GetDebugRoute());
             if (gameObject.TryGetComponent(out Button button))
             {
-                button.onClick.AddListener(OnClick);
+                button.onClick.AddListener(Clicked);
             }
         }
 
         /// <summary>
         /// OnClick should be called when the button is clicked and will try to start the route.
         /// </summary>
-        private void OnClick()
+        private void Clicked()
         {
             TryStartRoute();
         }
@@ -63,12 +64,18 @@ namespace Route
                 if (_route != null) return _route;
                 
                 try
-                {
+                { 
+                    //first try from text asset
+                    _route = JsonConvert.DeserializeObject<Route>(textAsset.text);
+                    if (_route != null) return _route;
+                    
+                    //then try from json string
                     _route = JsonConvert.DeserializeObject<Route>(routeJson);
+                    if (_route != null) return _route;
                 }
-                catch (Exception e)
+                catch
                 {
-                    Debug.Log(e);
+                    Debug.Log("No valid json found!");
                     return null;
                 }
 

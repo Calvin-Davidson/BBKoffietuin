@@ -15,6 +15,18 @@ namespace Route
 
         private void Update()
         {
+            if (routeHandler == null || routeHandler.ActiveRoute == null)
+            {
+                distanceDebugText.text = "No active route";
+                return;
+            }
+
+            if (!GpsService.Instance.GpsServiceEnabled)
+            {
+                distanceDebugText.text = "Gps service disabled";
+                return;
+            }
+            
             var nextPoint = routeHandler.ActiveRoute.GetNextPointToReach();
             var distance =
                 nextPoint.Coordinates.DistanceTo(Input.location.lastData.latitude, Input.location.lastData.longitude);
