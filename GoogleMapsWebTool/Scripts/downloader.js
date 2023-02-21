@@ -50,7 +50,7 @@ function Draw() {
 
                 this.getPanes().overlayLayer.removeChild(this.canvas);
             };
-            mapImg.src = `https://maps.googleapis.com/maps/api/staticmap?center=${bounds.getCenter().toUrlValue()}&zoom=${this.getMap().getZoom()}&size=${parseInt(width)}x${parseInt(height)}&scale=1&format=png&maptype=roadmap&key=AIzaSyA--TK3eFeoKElqmaynPIF9QvoK1-HnpXg`;
+            mapImg.src = `https://maps.googleapis.com/maps/api/staticmap?center=${bounds.getCenter().toUrlValue()}&zoom=${this.getMap().getZoom()}&size=${parseInt(width)}x${parseInt(height)}&scale=1&format=png&maptype=satellite&key=AIzaSyDKd82wTtJ6BZ9IsC34nv4WAas0w1Hh-Uc`;
         }
         onRemove() {
             this.canvas.parentNode.removeChild(this.canvas);

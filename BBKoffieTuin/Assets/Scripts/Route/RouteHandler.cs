@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Toolbox.Utilities;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Route
 {
-    public class RouteHandler : MonoBehaviour
+    public class RouteHandler : MonoSingleton<RouteHandler>
     {
         private Route _activeRoute = null;
         private readonly float _distanceInMetersForTrigger = 10;
@@ -14,13 +17,15 @@ namespace Route
         public UnityEvent<RoutePoint, int> onPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent onRouteChanged = new UnityEvent();
 
-        private void Awake()
+
+        private void Start()
         {
             ActiveRoute = RouteHelper.GetDebugRoute();
         }
 
         public void Update()
         {
+            if (!GpsService.Instance.GpsServiceEnabled) return;
             if (_activeRoute == null) return;
             if (GpsService.Instance.GpsServiceEnabled == false) return;
 
@@ -37,9 +42,19 @@ namespace Route
             if (nextPoint == null) return;
             if (nextPoint.HasTriggered) return;
 
-            if (HasReachedPoint(currentLat, currentLong, nextPoint))
+            //check if we are still on triggered points if not remove 
+            foreach (var triggeredPoint in ActiveRoute.PointsOfInterest.Where(p => p.isTriggered))
+            {
+                if(HasReachedPoint(currentLat, currentLong, triggeredPoint)) continue;
+                triggeredPoint.isTriggered = false;
+            }
+
+            //check if we reached the point and if we weren't already on it.
+            if (HasReachedPoint(currentLat, currentLong, nextPoint) && !nextPoint.isTriggered)
             {
                 nextPoint.HasTriggered = true;
+                nextPoint.isTriggered = true;
+                
                 nextPoint.onPointReached.Invoke();
                 ReachedNextPoint(nextPoint, nextPointIndex);
                 return;
@@ -53,12 +68,16 @@ namespace Route
 
                 if (!routePoint.HasTriggered)
                 {
+                    nextPoint.isTriggered = true;
+                    
                     ReachedFurtherPoint(routePoint, index);
                     return;
                 }
                 
                 if (routePoint.HasTriggered)
                 {
+                    nextPoint.isTriggered = true;
+                    
                     ReachedAlreadyReachedPoint(routePoint, index);
                     return;
                 }
@@ -108,7 +127,7 @@ namespace Route
             onFurtherPointReached.Invoke(routePoint, index);
             onPointReached.Invoke(routePoint, index);
         }
-        
+
         #region GETTERS & SETTERS
         
         /// <summary>
@@ -121,8 +140,8 @@ namespace Route
             {
                 if (_activeRoute == value) return;
 
-                onRouteChanged.Invoke();
                 _activeRoute = value;
+                onRouteChanged?.Invoke();
             }
         }
         

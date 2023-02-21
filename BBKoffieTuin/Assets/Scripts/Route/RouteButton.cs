@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,13 +12,14 @@ namespace Route
     public class RouteButton : MonoBehaviour
     {
         [SerializeField] private string routeJson;
-        private Route route;
+        private Route _route;
 
         /// <summary>
         /// Awake is called when the script instance is being loaded.
         /// </summary>
         private void Awake()
         {
+            GUIUtility.systemCopyBuffer = JsonConvert.SerializeObject(RouteHelper.GetDebugRoute());
             if (gameObject.TryGetComponent(out Button button))
             {
                 button.onClick.AddListener(OnClick);
@@ -37,26 +39,11 @@ namespace Route
         /// </summary>
         private void TryStartRoute()
         {
-            if (route == null)
-            {
-                //try set route from routeJson
-                try
-                {
-                    route = JsonUtility.FromJson<Route>(routeJson);
-                }
-                catch (Exception e)
-                {
-                    return;
-                }
-            }
-
-            if (route == null) return;
-
             //Before we can start we have to make sure we have GPS permission!
             GpsService.Instance.TryStartingLocationServices(() =>
             {
-                Destroy(this.gameObject);
-                Debug.Log("START ROUTE");
+                RouteHandler.Instance.ActiveRoute = Route;
+                MenuHandler.Instance.OpenRouteMenu();
                 //START THE ROUTE!
             }, () =>
             {
@@ -67,6 +54,26 @@ namespace Route
                 Debug.Log("SOMETHING WENT WRONG!");
                 //SOMETHING WENT WRONG IN GENERAL!
             });
+        }
+
+        private Route Route
+        {
+            get
+            {
+                if (_route != null) return _route;
+                
+                try
+                {
+                    _route = JsonConvert.DeserializeObject<Route>(routeJson);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                    return null;
+                }
+
+                return _route;
+            }
         }
     }
 }

@@ -86,7 +86,7 @@ public class GpsService : MonoSingleton<GpsService>
         }
 
         // Start service before querying location
-        Input.location.Start();
+        Input.location.Start(10, 1);
 
         // Wait until service initializes
         while (Input.location.status == LocationServiceStatus.Initializing && maxWaitInSeconds > 0)
@@ -110,10 +110,6 @@ public class GpsService : MonoSingleton<GpsService>
             Debug.LogFormat("Unable to determine device location. Failed with status {0}", Input.location.status);
             yield break;
         }
-
-        float latitude = Input.location.lastData.latitude;
-        float longitude = Input.location.lastData.longitude;
-        // TODO success do something with location
 
         GpsServiceEnabled = true;
         onLocationServicesStarted.Invoke();
