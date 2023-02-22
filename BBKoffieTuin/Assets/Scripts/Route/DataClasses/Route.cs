@@ -39,11 +39,20 @@ namespace Route
             foreach (var point in PointsOfInterest)
             {
                 index++;
-                
                 if(point.HasTriggered == false) return index;
             }
 
             return -1;
+        }
+
+        public RoutePoint GetFinalPoint()
+        {
+            return PointsOfInterest[-1];
+        }
+        
+        public int GetFinalPointIndex()
+        {
+            return PointsOfInterest.Count - 1;
         }
         
         /// <summary>

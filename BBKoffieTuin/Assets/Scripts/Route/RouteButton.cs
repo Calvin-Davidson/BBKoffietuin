@@ -55,6 +55,9 @@ namespace Route
                 //SOMETHING WENT WRONG IN GENERAL!
                 Debug.Log("SOMETHING WENT WRONG!");
             });
+            
+            RouteHandler.Instance.ActiveRoute = Route;
+            MenuHandler.Instance.OpenRouteMenu();
         }
 
         private Route Route
@@ -66,14 +69,17 @@ namespace Route
                 try
                 { 
                     //first try from text asset
-                    _route = JsonConvert.DeserializeObject<Route>(textAsset.text);
-                    if (_route != null) return _route;
+                    if (textAsset != null)
+                    {   
+                        _route = JsonConvert.DeserializeObject<Route>(textAsset.text);
+                        if (_route != null) return _route;
+                    }   
                     
                     //then try from json string
                     _route = JsonConvert.DeserializeObject<Route>(routeJson);
                     if (_route != null) return _route;
                 }
-                catch
+                catch (Exception e)
                 {
                     Debug.Log("No valid json found!");
                     return null;

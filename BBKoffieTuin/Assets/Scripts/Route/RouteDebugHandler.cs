@@ -28,13 +28,12 @@ namespace Route
             }
             
             var nextPoint = routeHandler.ActiveRoute.GetNextPointToReach();
-            var distance =
-                nextPoint.Coordinates.DistanceTo(Input.location.lastData.latitude, Input.location.lastData.longitude);
+            var distance = nextPoint.Coordinates.DistanceTo(Input.location.lastData.latitude, Input.location.lastData.longitude);
 
             distanceDebugText.text = "Distance to next point (" + nextPoint.pointName + "): " + (distance * 1000) + " meters ";
         }
 
-        private void Awake()
+        private void Awake()    
         {
             routeHandler.onNextPointReached.AddListener((point, index) =>
             {
@@ -49,6 +48,16 @@ namespace Route
             routeHandler.onAlreadyReachedPointReached.AddListener((point, index) =>
             {
                 triggeredDebugText.text = "already reached point : " + point.pointName + " at index: " + index;
+            });
+            
+            routeHandler.onFinalPointReached.AddListener((point, index) =>
+            {
+                triggeredDebugText.text = "Final point reached! : " + point.pointName + " at index: " + index;
+            });
+            
+            routeHandler.onFinalPointLeft.AddListener((point, index) =>
+            {
+                triggeredDebugText.text = "Final point left! : " + point.pointName + " at index: " + index;
             });
         }
         
