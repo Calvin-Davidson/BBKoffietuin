@@ -23,6 +23,8 @@ public class PhoneDirection : MonoBehaviour
 
     void Update()
     {
+        if (!GpsService.Instance.GpsServiceEnabled) return;
+        
         float latitude = Input.location.lastData.latitude;
         float longitude = Input.location.lastData.longitude;
         
