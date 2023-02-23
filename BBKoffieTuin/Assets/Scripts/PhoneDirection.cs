@@ -1,9 +1,10 @@
 using System;
 using TMPro;
+using Toolbox.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PhoneDirection : MonoBehaviour
+public class PhoneDirection : MonoSingleton<PhoneDirection>
 {
     [SerializeField] private float rotationTolerance = 1f;
     
