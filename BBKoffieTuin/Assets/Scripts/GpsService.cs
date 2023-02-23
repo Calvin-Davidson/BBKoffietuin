@@ -12,6 +12,8 @@ public class GpsService : MonoSingleton<GpsService>
 
     private bool _hasFineLocationPermission = false;
     private PermissionCallbacks _permissionCallbacks;
+    private readonly float _desiredAccuracyInMeters = 1f;
+    private readonly float _updateDistanceInMeters = 1f;
 
     //events
     public UnityEvent onLocationServicesStarted = new UnityEvent();
@@ -81,7 +83,7 @@ public class GpsService : MonoSingleton<GpsService>
         }
 
         // Start service before querying location
-        Input.location.Start(10, 1);
+        Input.location.Start(_desiredAccuracyInMeters, _updateDistanceInMeters);
 
         // Wait until service initializes
         while (Input.location.status == LocationServiceStatus.Initializing && maxWaitInSeconds > 0)

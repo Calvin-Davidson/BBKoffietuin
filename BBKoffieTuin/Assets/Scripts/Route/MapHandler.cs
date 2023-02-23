@@ -1,5 +1,4 @@
-﻿    using System;
-using Newtonsoft.Json;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +50,10 @@ namespace Route
             InitializeUserImage();
         }
         
+        /// <summary>
+        /// Create all marker object on the map by using the width and height en coordinates of the map and the coordinate of the marker.
+        /// the created marker will also be set under the 'routePoint' object under the markerObject to be used.
+        /// </summary>
         public void InstantiateMarkers()
         {
             if (routeHandler.ActiveRoute.ImageTexture == null)
@@ -84,6 +87,11 @@ namespace Route
             }
         }
 
+        /// <summary>
+        /// Creates an GameObject for the user (the player) and sets the position to the position on the map image
+        /// by using a 0-1 value by calculating the width and height of the map image and the coordinates of the map.
+        /// an caches this object for later use.
+        /// </summary>
         public void InitializeUserImage()
         {
             if (!GpsService.Instance.GpsServiceEnabled) return;
@@ -113,6 +121,10 @@ namespace Route
             _userRect.localPosition = newRectPosition;
         }
 
+        /// <summary>
+        /// Updates the users object on the map by using a 0-1 value by calculating the width and height of the map image and the coordinates of the map.
+        /// and the coordinates if the users device (in latitude and longitude).
+        /// </summary>
         private void UpdateUserPosition()
         {
             if (!GpsService.Instance.GpsServiceEnabled) return;
@@ -132,17 +144,35 @@ namespace Route
             _userRect.localPosition = newRectPosition;
         }
 
+        /// <summary>
+        /// Sets the users rotation to the new rotation.
+        /// </summary>
+        /// <param name="newRotation"></param>
         private void UpdateUserRotation(float newRotation)
         {
             _userRect.rotation = Quaternion.Euler(new Vector3(0,0,newRotation));
         }
 
+        /// <summary>
+        /// Gets a 0-1 value of the horizontal position of the map by using the width and height of the map and the coordinates of the map and user.
+        /// </summary>
+        /// <param name="east"></param>
+        /// <param name="west"></param>
+        /// <param name="longitude"></param>
+        /// <returns></returns>
         private double GetHorizontalPosition(double east, double west, double longitude)
         {
             var val = (longitude - west) / (east - west);
             return Math.Max(0, Math.Min(1, val));
         }
         
+        /// <summary>
+        /// Gets a 0-1 value of the vertical position of the map by using the width and height of the map and the coordinates of the map and user.
+        /// </summary>
+        /// <param name="north"></param>
+        /// <param name="south"></param>
+        /// <param name="latitude"></param>
+        /// <returns></returns>
         private double GetVeritcalPosition(double north, double south, double latitude)
         {   
             var val = (latitude - south) / (north - south);

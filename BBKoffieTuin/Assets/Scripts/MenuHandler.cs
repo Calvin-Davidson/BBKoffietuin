@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MenuHandler : MonoSingleton<MenuHandler>
 {
-    public GameObject mainMenu;
-    public GameObject routeMenu;
+    [SerializeReference] private GameObject mainMenu;
+    [SerializeReference] private GameObject routeMenu;
     
     public void OpenRouteMenu()
     {

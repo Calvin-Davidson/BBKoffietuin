@@ -8,15 +8,19 @@ namespace Route
 {
     public class RoutePoint
     {
+        //variables
         public string pointName = "default";
         public Coordinates Coordinates;
         
-        [JsonIgnore] private bool _hasTriggered = false;
-        [JsonIgnore] private bool _isTriggered = false;
-        [JsonIgnore] public UnityEvent onPointReached = new UnityEvent();
-
         [JsonIgnore] public GameObject _markerGameObject;
         [JsonIgnore] public Color32 _reachedColor = new Color32(100, 100, 100, 255);
+        
+        [JsonIgnore] private bool _hasTriggered = false;
+        [JsonIgnore] private bool _isTriggered = false;
+        
+        //events
+        [JsonIgnore] public UnityEvent onPointReached = new UnityEvent();
+
 
         [JsonIgnore]
         public bool HasTriggered

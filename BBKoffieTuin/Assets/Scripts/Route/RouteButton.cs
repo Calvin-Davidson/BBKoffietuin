@@ -53,7 +53,7 @@ namespace Route
             }, () =>
             {
                 //SOMETHING WENT WRONG IN GENERAL!
-                Debug.Log("SOMETHING WENT WRONG!");
+                Debug.Log("SOMETHING UNEXPECTED HAPPENED! BUT I DON'T KNOW WHAT!");
             });
         }
 
