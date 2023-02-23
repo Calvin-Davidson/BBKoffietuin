@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Route
@@ -22,7 +23,7 @@ namespace Route
                 return null;
             }
         }
-        
+
         /// <summary>
         /// Creates json from route object using json.net
         /// </summary>
@@ -44,8 +45,23 @@ namespace Route
         /// <returns></returns>
         public static Route GetDebugRoute()
         {
+            //load json from resources folder
+            string json = Resources.Load<TextAsset>("Data/mapData").text;
+            JObject jObject = JObject.Parse(json);
+            string base64Image = jObject["base64Url"].Value<string>();
+
+            var bounds = new MapBounds()
+            {
+                north = jObject["bounds"]["north"].Value<double>(),
+                south = jObject["bounds"]["south"].Value<double>(),
+                east = jObject["bounds"]["east"].Value<double>(),
+                west = jObject["bounds"]["west"].Value<double>()
+            };
+
             return new Route()
             {
+                base64Image = base64Image,
+                bounds = bounds,
                 routeName = "debugRouteName",
                 PointsOfInterest = new List<RoutePoint>()
                 {

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Generic;
+using Newtonsoft.Json;
+using Toolbox.MethodExtensions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Route
@@ -9,11 +12,14 @@ namespace Route
     {
         public string routeName = "";
         public string base64Image;
+        public MapBounds bounds;
+
         public List<Coordinates> PathPoints = new List<Coordinates>();
         public List<RoutePoint> PointsOfInterest = new List<RoutePoint>();
         
-        private Sprite _imageSprite;
-        private Texture _imageTexture;
+        [JsonIgnore] private Sprite _imageSprite;
+        [JsonIgnore] private Texture _imageTexture;
+        
 
         /// <summary>
         /// Get the next point to reach in the route
@@ -21,7 +27,15 @@ namespace Route
         /// <returns></returns>
         public RoutePoint GetNextPointToReach()
         {
-            return PointsOfInterest[GetNextPointToReachIndex()];
+            var index = GetNextPointToReachIndex();
+            var contains = PointsOfInterest.ContainsSlot(index);
+            return (contains) ? PointsOfInterest[index] : null;
+        }
+
+        public bool HasNextPointToReach()
+        {
+            var point = GetNextPointToReach();
+            return point != null;
         }
         
         /// <summary>
@@ -34,16 +48,26 @@ namespace Route
             foreach (var point in PointsOfInterest)
             {
                 index++;
-                
                 if(point.HasTriggered == false) return index;
             }
 
             return -1;
         }
+
+        public RoutePoint GetFinalPoint()
+        {
+            return PointsOfInterest[^1];
+        }
+        
+        public int GetFinalPointIndex()
+        {
+            return PointsOfInterest.Count - 1;
+        }
         
         /// <summary>
         /// Gets the texture of the route or creates it from the base64 string.
         /// </summary>
+        [JsonIgnore]
         public Texture ImageTexture
         {
             get
@@ -64,18 +88,17 @@ namespace Route
         /// <summary>
         /// Gets the texture and converts it to a sprite.
         /// </summary>
+        [JsonIgnore]
         public Sprite ImageSprite
         {
             get
             {
                 if (_imageSprite != null) return _imageSprite;
-                if (string.IsNullOrEmpty(base64Image)) return null;
 
                 //create it from the base64 string and cache it.
                 Texture2D tex = (Texture2D) ImageTexture;
                 if (tex == null) return null;
                 Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-
                 _imageSprite = sprite;
                 return sprite;
             }

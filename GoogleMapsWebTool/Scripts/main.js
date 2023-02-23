@@ -52,16 +52,3 @@ google.maps.event.addListener(map, 'zoom_changed', function () {
     input_zoom.value = map.getZoom();
 });
 
-//When the google api is loaded and we received a map.
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: StartCoordinates,
-        zoom: 14,
-        mapTypeControl: false,
-        zoomControl: false,
-        streetViewControl: false,
-    });
-
-
-    DrawOnMap();
-}

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +12,9 @@ namespace Route
     /// </summary>
     public class RouteButton : MonoBehaviour
     {
-        [SerializeField] private string routeJson;
-        private Route route;
+        [SerializeField] private TextAsset textAsset; //first option
+        [SerializeField] private string routeJson; //second option
+        private Route _route;
 
         /// <summary>
         /// Awake is called when the script instance is being loaded.
@@ -20,14 +23,14 @@ namespace Route
         {
             if (gameObject.TryGetComponent(out Button button))
             {
-                button.onClick.AddListener(OnClick);
+                button.onClick.AddListener(Clicked);
             }
         }
 
         /// <summary>
         /// OnClick should be called when the button is clicked and will try to start the route.
         /// </summary>
-        private void OnClick()
+        private void Clicked()
         {
             TryStartRoute();
         }
@@ -37,36 +40,50 @@ namespace Route
         /// </summary>
         private void TryStartRoute()
         {
-            if (route == null)
-            {
-                //try set route from routeJson
-                try
-                {
-                    route = JsonUtility.FromJson<Route>(routeJson);
-                }
-                catch (Exception e)
-                {
-                    return;
-                }
-            }
-
-            if (route == null) return;
-
             //Before we can start we have to make sure we have GPS permission!
             GpsService.Instance.TryStartingLocationServices(() =>
             {
-                Destroy(this.gameObject);
-                Debug.Log("START ROUTE");
                 //START THE ROUTE!
+                RouteHandler.Instance.ActiveRoute = Route;
+                MenuHandler.Instance.OpenRouteMenu();
             }, () =>
             {
-                Debug.Log("NO GPS PERMISSION CAN'T START");
                 //NO PERMISSION!
+                Debug.Log("NO GPS PERMISSION CAN'T START");
             }, () =>
             {
-                Debug.Log("SOMETHING WENT WRONG!");
                 //SOMETHING WENT WRONG IN GENERAL!
+                Debug.Log("SOMETHING UNEXPECTED HAPPENED! BUT I DON'T KNOW WHAT!");
             });
+        }
+
+        private Route Route
+        {
+            get
+            {
+                if (_route != null) return _route;
+                
+                try
+                {
+                    //first try from text asset
+                    if (textAsset != null)
+                    {   
+                        _route = JsonConvert.DeserializeObject<Route>(textAsset.text);
+                        if (_route != null) return _route;
+                    }
+
+                    //then try from json string
+                    _route = JsonConvert.DeserializeObject<Route>(routeJson);
+                    if (_route != null) return _route;
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("No valid json found!");
+                    return null;
+                }
+
+                return _route;
+            }
         }
     }
 }

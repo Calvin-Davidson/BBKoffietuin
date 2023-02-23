@@ -12,6 +12,8 @@ public class GpsService : MonoSingleton<GpsService>
 
     private bool _hasFineLocationPermission = false;
     private PermissionCallbacks _permissionCallbacks;
+    private readonly float _desiredAccuracyInMeters = 1f;
+    private readonly float _updateDistanceInMeters = 1f;
 
     //events
     public UnityEvent onLocationServicesStarted = new UnityEvent();
@@ -31,21 +33,16 @@ public class GpsService : MonoSingleton<GpsService>
     {
         RequestLocationPermission(() =>
         {
-            StartLocationServices(() =>
-            {
-                startedCallback?.Invoke();
-            }, () =>
-            {
-             errorCallback?.Invoke();   
-            });
+            StartLocationServices(startedCallback, errorCallback);
         }, () =>
         {
             noPermissionCallback?.Invoke();
             errorCallback?.Invoke();
         });
     }
-    
-    public void StartLocationServices(Action startedCallback = null, Action errorCallback = null)
+
+
+    private void StartLocationServices(Action startedCallback = null, Action errorCallback = null)
     {
         StartCoroutine(StartLocationServicesEnumerator(startedCallback, errorCallback));
     }
@@ -86,7 +83,7 @@ public class GpsService : MonoSingleton<GpsService>
         }
 
         // Start service before querying location
-        Input.location.Start();
+        Input.location.Start(_desiredAccuracyInMeters, _updateDistanceInMeters);
 
         // Wait until service initializes
         while (Input.location.status == LocationServiceStatus.Initializing && maxWaitInSeconds > 0)
@@ -110,10 +107,6 @@ public class GpsService : MonoSingleton<GpsService>
             Debug.LogFormat("Unable to determine device location. Failed with status {0}", Input.location.status);
             yield break;
         }
-
-        float latitude = Input.location.lastData.latitude;
-        float longitude = Input.location.lastData.longitude;
-        // TODO success do something with location
 
         GpsServiceEnabled = true;
         onLocationServicesStarted.Invoke();

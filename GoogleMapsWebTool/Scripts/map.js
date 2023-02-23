@@ -21,9 +21,6 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: StartCoordinates,
         zoom: 14,
-        mapTypeControl: false,
-        zoomControl: false,
-        streetViewControl: false,
     });
 
 
