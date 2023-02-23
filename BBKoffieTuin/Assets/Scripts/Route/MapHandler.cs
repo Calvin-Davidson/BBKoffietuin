@@ -17,22 +17,24 @@ namespace Route
         [SerializeField] private GameObject userPrefab;
 
         private RectTransform _userRect;
+        private GameObject _userGameObject;
 
         private void OnEnable()
         {
             routeHandler.onRouteChanged.AddListener(InitializeMap);
+            PhoneDirection.Instance.onNortherPointChange.AddListener(UpdateUserRotation);
             InitializeMap();
         }
 
         private void OnDisable()
         {
             routeHandler.onRouteChanged.RemoveListener(InitializeMap);
+            PhoneDirection.Instance.onNortherPointChange.RemoveListener(UpdateUserRotation);
         }
 
         private void Update()
         {
             UpdateUserPosition();
-            UpdateUserRotation();
         }
 
         private void InitializeMap()
@@ -69,6 +71,7 @@ namespace Route
 
                 //instantiate markers
                 var obj = Instantiate(markerPrefab, mapImage.transform, true);
+                point._markerGameObject = obj;
                 obj.GetComponentInChildren<TMP_Text>().text = point.pointName;
                 var rect = obj.GetComponent<RectTransform>();
                 rect.localScale = new Vector3(1,1,1);
@@ -99,8 +102,8 @@ namespace Route
             double y = GetVeritcalPosition(routeHandler.ActiveRoute.bounds.north, routeHandler.ActiveRoute.bounds.south, Input.location.lastData.longitude);
 
             //instantiate markers
-            var obj = Instantiate(userPrefab, mapImage.transform, true);
-            _userRect = obj.GetComponent<RectTransform>();
+            _userGameObject = Instantiate(userPrefab, mapImage.transform, true);
+            _userRect = _userGameObject.GetComponent<RectTransform>();
             _userRect.localScale = new Vector3(1,1,1);
                 
             Vector2 newRectPosition = new Vector2();
@@ -110,7 +113,7 @@ namespace Route
             _userRect.localPosition = newRectPosition;
         }
 
-        public void UpdateUserPosition()
+        private void UpdateUserPosition()
         {
             if (!GpsService.Instance.GpsServiceEnabled) return;
             
@@ -129,19 +132,21 @@ namespace Route
             _userRect.localPosition = newRectPosition;
         }
 
-        public void UpdateUserRotation()
+        private void UpdateUserRotation(float newRotation)
         {
-            
+            _userRect.rotation = Quaternion.Euler(new Vector3(0,0,newRotation));
         }
 
-        public double GetHorizontalPosition(double east, double west, double longitude)
+        private double GetHorizontalPosition(double east, double west, double longitude)
         {
-            return (longitude - west) / (east - west);
+            var val = (longitude - west) / (east - west);
+            return Math.Max(0, Math.Min(1, val));
         }
         
-        public double GetVeritcalPosition(double north, double south, double latitude)
+        private double GetVeritcalPosition(double north, double south, double latitude)
         {   
-            return (latitude - south) / (north - south);
+            var val = (latitude - south) / (north - south);
+            return Math.Max(0, Math.Min(1, val));
         }
     }
 }

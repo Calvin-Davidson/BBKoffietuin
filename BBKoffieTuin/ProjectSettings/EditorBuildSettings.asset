@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PhoneDirection.unity
-    guid: 7eebbe07b1002db43b000bef093230d1
+    path: Assets/Scenes/Main.unity
+    guid: 15067edda84304341a734516ea92b2db
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

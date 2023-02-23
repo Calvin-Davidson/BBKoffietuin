@@ -1,6 +1,8 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
+using Toolbox.Attributes;
+using Toolbox.MethodExtensions;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Route
 {
@@ -28,6 +30,12 @@ namespace Route
             }
             
             var nextPoint = routeHandler.ActiveRoute.GetNextPointToReach();
+            if(nextPoint == null)
+            {
+                distanceDebugText.text = "No next point";
+                return;
+            }
+            
             var distance = nextPoint.Coordinates.DistanceTo(Input.location.lastData.latitude, Input.location.lastData.longitude);
 
             distanceDebugText.text = "Distance to next point (" + nextPoint.pointName + "): " + (distance * 1000) + " meters ";
@@ -60,6 +68,5 @@ namespace Route
                 triggeredDebugText.text = "Final point left! : " + point.pointName + " at index: " + index;
             });
         }
-        
     }
 }

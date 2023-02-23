@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Generic;
 using Newtonsoft.Json;
+using Toolbox.MethodExtensions;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -26,7 +27,15 @@ namespace Route
         /// <returns></returns>
         public RoutePoint GetNextPointToReach()
         {
-            return PointsOfInterest[GetNextPointToReachIndex()];
+            var index = GetNextPointToReachIndex();
+            var contains = PointsOfInterest.ContainsSlot(index);
+            return (contains) ? PointsOfInterest[index] : null;
+        }
+
+        public bool HasNextPointToReach()
+        {
+            var point = GetNextPointToReach();
+            return point != null;
         }
         
         /// <summary>
@@ -47,7 +56,7 @@ namespace Route
 
         public RoutePoint GetFinalPoint()
         {
-            return PointsOfInterest[-1];
+            return PointsOfInterest[^1];
         }
         
         public int GetFinalPointIndex()

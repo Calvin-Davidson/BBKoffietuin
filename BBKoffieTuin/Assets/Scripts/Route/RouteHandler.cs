@@ -10,7 +10,7 @@ namespace Route
     public class RouteHandler : MonoSingleton<RouteHandler>
     {
         private Route _activeRoute = null;
-        private readonly float _distanceInMetersForTrigger = 10;
+        private readonly float _distanceInMetersForTrigger = 15;
 
         public UnityEvent<RoutePoint, int> onNextPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent<RoutePoint, int> onFurtherPointReached = new UnityEvent<RoutePoint, int>();
@@ -39,10 +39,10 @@ namespace Route
         private void CheckLeftPoints(Coordinates userCoords)
         {
             //check if we are still on triggered points if not remove 
-            foreach (var triggeredPoint in ActiveRoute.PointsOfInterest.Where(p => p.isTriggered))
+            foreach (var triggeredPoint in ActiveRoute.PointsOfInterest.Where(p => p.IsTriggered))
             {
                 if (HasReachedPoint(userCoords.latitude, userCoords.longitude, triggeredPoint)) continue;
-                triggeredPoint.isTriggered = false;
+                triggeredPoint.IsTriggered = false;
 
                 //check if we left the final point.
                 if (triggeredPoint == ActiveRoute.GetFinalPoint())
@@ -72,17 +72,17 @@ namespace Route
             {
                 index++;
                 
-                if(routePoint.isTriggered) continue;
+                if(routePoint.IsTriggered) continue;
 
                 bool hasReachedFurtherPoint = CheckReachedFurtherPoint(userCoords, routePoint, index);
-                bool hasReachedPreviousPoint = CheckReachedFurtherPoint(userCoords, routePoint, index);
+                bool hasReachedPreviousPoint = CheckReachedAlreadyReachedPoint(userCoords, routePoint, index);
             }
         }
 
         private bool CheckReachedFurtherPoint(Coordinates userCoords, RoutePoint routePoint, int index)
         {
             if (!HasReachedPoint(userCoords.latitude, userCoords.longitude, routePoint)) return false;
-            if (!routePoint.HasTriggered) return false;
+            if (routePoint.HasTriggered) return false;
 
             ReachedFurtherPoint(routePoint, index);
 
@@ -92,7 +92,7 @@ namespace Route
         private bool CheckReachedAlreadyReachedPoint(Coordinates userCoords, RoutePoint routePoint, int index)
         {
             if (!HasReachedPoint(userCoords.latitude, userCoords.longitude, routePoint)) return false;
-            if (routePoint.HasTriggered) return false;
+            if (!routePoint.HasTriggered) return false;
             
             ReachedAlreadyReachedPoint(routePoint, index);
             
@@ -119,44 +119,57 @@ namespace Route
         /// <summary>
         /// Reached the next point in the route.
         /// </summary>
-        private void ReachedNextPoint(RoutePoint routePoint, int index)
+        public void ReachedNextPoint(RoutePoint routePoint, int index)
         {
             routePoint.onPointReached.Invoke();
+            onNextPointReached.Invoke(routePoint, index);
+            onPointReached.Invoke(routePoint, index);
             
             routePoint.HasTriggered = true;
-            routePoint.isTriggered = true;
+            routePoint.IsTriggered = true;
 
+            //check if it is the final point.
             if (routePoint == ActiveRoute.GetFinalPoint())
             {
                 onFinalPointReached.Invoke(routePoint, index);
             }
-            
-            onNextPointReached.Invoke(routePoint, index);
-            onPointReached.Invoke(routePoint, index);
         }
 
         /// <summary>
         /// Gets triggered when you reach a point that you already reached.
         /// </summary>
-        private void ReachedAlreadyReachedPoint(RoutePoint routePoint, int index)
+        public void ReachedAlreadyReachedPoint(RoutePoint routePoint, int index)
         {
-            routePoint.onPointReached.Invoke();
-            routePoint.isTriggered = true;
-            
             onAlreadyReachedPointReached.Invoke(routePoint, index);
             onPointReached.Invoke(routePoint, index);
+            routePoint.onPointReached.Invoke();
+
+            routePoint.IsTriggered = true;
         }
 
         /// <summary>
         /// Gets triggered when you reach a point but you skipped some points in the process.
         /// </summary>
-        private void ReachedFurtherPoint(RoutePoint routePoint, int index)
+        public void ReachedFurtherPoint(RoutePoint routePoint, int index)
         {
-            routePoint.onPointReached.Invoke();
-            routePoint.isTriggered = true;
-            
             onFurtherPointReached.Invoke(routePoint, index);
             onPointReached.Invoke(routePoint, index);
+            routePoint.onPointReached.Invoke();
+            
+            routePoint.IsTriggered = true;
+            
+            //check if it is the final point.
+            if (routePoint == ActiveRoute.GetFinalPoint())
+            {
+                onFinalPointReached.Invoke(routePoint, index);
+            }
+            
+            //SET ALL POINTS BEFORE THIS POINT TO TRIGGERED.
+            for (int i = 0; i < index; i++)
+            {
+                var point = ActiveRoute.PointsOfInterest[i];
+                point.HasTriggered = true;
+            }
         }
 
         #region GETTERS & SETTERS

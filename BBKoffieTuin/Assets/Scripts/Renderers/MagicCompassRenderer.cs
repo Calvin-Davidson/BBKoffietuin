@@ -9,12 +9,11 @@ namespace Renderers
     {
         [SerializeField] private Image northPointer;
         [SerializeField] private Image magicPointer;
-        [SerializeField] private PhoneDirection phoneDirection;
         
         private void Start()
         {
-            phoneDirection.onNortherPointChange.AddListener(RenderNortherPoint);
-            phoneDirection.onTargetPointChange.AddListener(RenderMagicPoint);
+            PhoneDirection.Instance.onNortherPointChange.AddListener(RenderNortherPoint);
+            PhoneDirection.Instance.onTargetPointChange.AddListener(RenderMagicPoint);
         }
 
         private void RenderNortherPoint(float newRotation)
