@@ -1,18 +1,22 @@
 # BB Stories
-Een voorbeeld repository voor het examenwerk
+BBDeKoffieTuin verkoopt wandelroutes voor picknicks, nu blijkt dat het moeilijk is voor kinderen om dit vol te houden omdat er niks interessants is voor ze. Het doel is dat er een app komt met verschillende AR games of systemen die door de route heen het kind kunnen afleiden.
 
-In deze repository vind je de informatie over het examen project.
+Ons concept is inplaats allemaal losse minigames de hele wandel route een ervaring te maken, doormiddel van location based story telling. Op de route zullen verschillende "points of interest" zijn, zoals een windmolen, rivier, een HELE grote boom etc. Doormidden van de GPS locatie van de telefoon maken wij een story om deze objecten heen die tegen het kind praat en het kind opdachten kan geven samen of zonder de ouders.
 
-Omschrijf de examenopdracht evt de klant en wat het doel voor de klant is.
-Omschrijf ook beknopt wat het idee van je game is. 
-Een complete en uitgebreide beschrijving komt in het functioneel ontwerp (onderdeel van de [wiki](https://github.com/erwinhenraat/VoorbeeldExamenRepo/wiki))
+Wat wij hiermee willen bereiken is een volledige ervaring waar het kind continue iets te doen heeft en ook steeds iets heeft om naar uit te kijken.
 
-# Geproduceerde Game Onderdelen
+## Geproduceerde Game Onderdelen
 
-Calvin:
-Emile:
-Wouter:
-Vivian:
-Sterre:
-Leihko:
-Larhona:
+Calvin: Lead developer
+
+Emile: Developer
+
+Wouter: Notulist
+
+Vivian: Scrum master
+
+Sterre: Lead artist
+
+Leihko: Project owner
+
+Larhona: Artist
