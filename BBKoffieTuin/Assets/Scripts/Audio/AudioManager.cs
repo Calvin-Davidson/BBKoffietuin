@@ -26,14 +26,16 @@ namespace Audio
             if (_audioSource.isPlaying) return;
             if (point.AudioPaths.IsEmpty()) return;
 
-            if (Resources.Load(point.AudioPaths[0]) == null)
+            int audioIndex = Random.Range(0, point.AudioPaths.Count);
+
+            if (Resources.Load(point.AudioPaths[audioIndex]) == null)
             {
                 Debug.LogWarning("Unable to load audio clip from: " + point.AudioPaths[0]);
                 return;
             }
 
-            Debug.Log(Resources.Load(point.AudioPaths[0], typeof(AudioClip)) as AudioClip);
-            _audioSource.clip = Resources.Load(point.AudioPaths[0], typeof(AudioClip)) as AudioClip;
+            Debug.Log(Resources.Load(point.AudioPaths[audioIndex], typeof(AudioClip)) as AudioClip);
+            _audioSource.clip = Resources.Load(point.AudioPaths[audioIndex], typeof(AudioClip)) as AudioClip;
             _audioSource.time = 0;
             _audioSource.Play();
         }
