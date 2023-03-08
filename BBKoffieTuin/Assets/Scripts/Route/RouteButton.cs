@@ -40,6 +40,10 @@ namespace Route
         /// </summary>
         private void TryStartRoute()
         {
+#if UNITY_EDITOR
+            RouteHandler.Instance.ActiveRoute = Route;
+            MenuHandler.Instance.OpenRouteMenu();      
+#else
             //Before we can start we have to make sure we have GPS permission!
             GpsService.Instance.TryStartingLocationServices(() =>
             {
@@ -55,6 +59,7 @@ namespace Route
                 //SOMETHING WENT WRONG IN GENERAL!
                 Debug.Log("SOMETHING UNEXPECTED HAPPENED! BUT I DON'T KNOW WHAT!");
             });
+#endif
         }
 
         private Route Route
