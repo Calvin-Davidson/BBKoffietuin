@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +17,7 @@ namespace Route
         [SerializeField] private GameObject markerPrefab;
         [SerializeField] private GameObject userPrefab;
 
+        private readonly List<GameObject> _markers = new List<GameObject>();
         private RectTransform _userRect;
         private GameObject _userGameObject;
 
@@ -66,16 +69,23 @@ namespace Route
             var width = mapRect.width;
             var height = mapRect.height;
 
+            int index = -1;
             foreach (var point in routeHandler.ActiveRoute.PointsOfInterest)
             {
+                index++;
                 //this gives us the 0 - 1 value of where the circle should be drawn.
                 double x = GetHorizontalPosition(routeHandler.ActiveRoute.bounds.east, routeHandler.ActiveRoute.bounds.west, point.Coordinates.longitude);
                 double y = GetVeritcalPosition(routeHandler.ActiveRoute.bounds.north, routeHandler.ActiveRoute.bounds.south, point.Coordinates.latitude);
 
                 //instantiate markers
                 var obj = Instantiate(markerPrefab, mapImage.transform, true);
-                point._markerGameObject = obj;
-                obj.GetComponentInChildren<TMP_Text>().text = point.pointName;
+                obj.name = "marker: " + point.PointName;
+                var newReferenceIndex = index; //must be a new reference or the index will be the last one.
+                obj.AddComponent<Clickable>().onClick.AddListener(() => { RouteHandler.Instance.GoToIndex(newReferenceIndex);});
+                _markers.Add(obj);
+                
+                point.MarkerGameObject = obj;
+                obj.GetComponentInChildren<TMP_Text>().text = point.PointName;
                 var rect = obj.GetComponent<RectTransform>();
                 rect.localScale = new Vector3(1,1,1);
                 
