@@ -43,7 +43,7 @@ namespace Renderers
             if (previousRotationAverage + 180 < newRotation) newRotation -= 360;
             
             pointsContainer.Add(newRotation);
-            if (_magicPoints.Count > accuracy) pointsContainer.RemoveAt(0);
+            if (pointsContainer.Count > accuracy) pointsContainer.RemoveAt(0);
 
             float averageRotation = pointsContainer.Sum() / pointsContainer.Count;
             
