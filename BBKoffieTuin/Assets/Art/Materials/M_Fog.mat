@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_Fog
+  m_Name: M_Fog
   m_Shader: {fileID: -6465566751694194690, guid: 427641a4bc0bd5d47bb44e220ea2ba97,
     type: 3}
   m_ValidKeywords: []
