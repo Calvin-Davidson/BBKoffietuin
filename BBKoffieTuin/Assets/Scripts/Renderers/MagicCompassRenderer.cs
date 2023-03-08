@@ -15,7 +15,8 @@ namespace Renderers
         private readonly List<float> _northerPoints = new();
         private readonly List<float> _magicPoints = new();
         
-        private const int AverageAccuracy = 5;
+        private const int AverageNortherPointAccuracy = 5;
+        private const int AverageMagicPointAccuracy = 10;
         
         private void Start()
         {
@@ -26,15 +27,15 @@ namespace Renderers
 
         private void RenderNortherPoint(float newRotation)
         {
-            RenderPointer(northPointerTransform, newRotation, _northerPoints);
+            RenderPointer(northPointerTransform, newRotation, AverageNortherPointAccuracy, _northerPoints);
         }
         
         private void RenderMagicPoint(float newRotation)
         {
-            RenderPointer(magicPointerTransform, newRotation, _magicPoints);
+            RenderPointer(magicPointerTransform, newRotation,AverageMagicPointAccuracy, _magicPoints);
         }
 
-        private void RenderPointer(RectTransform pointerTransform, float newRotation, List<float> pointsContainer)
+        private void RenderPointer(RectTransform pointerTransform, float newRotation, int accuracy, List<float> pointsContainer)
         {
             float previousRotationAverage = pointsContainer.Count > 1 ? pointsContainer.Sum() / pointsContainer.Count : 0;
 
@@ -42,7 +43,7 @@ namespace Renderers
             if (previousRotationAverage + 180 < newRotation) newRotation -= 360;
             
             pointsContainer.Add(newRotation);
-            if (_magicPoints.Count > AverageAccuracy) pointsContainer.RemoveAt(0);
+            if (_magicPoints.Count > accuracy) pointsContainer.RemoveAt(0);
 
             float averageRotation = pointsContainer.Sum() / pointsContainer.Count;
             
