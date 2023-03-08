@@ -38,34 +38,34 @@ namespace Route
             
             var distance = nextPoint.Coordinates.DistanceTo(Input.location.lastData.latitude, Input.location.lastData.longitude);
 
-            distanceDebugText.text = "Distance to next point (" + nextPoint.pointName + "): " + (distance * 1000) + " meters ";
+            distanceDebugText.text = "Distance to next point (" + nextPoint.PointName + "): " + (distance * 1000) + " meters ";
         }
 
         private void Awake()    
         {
             routeHandler.onNextPointReached.AddListener((point, index) =>
             {
-                triggeredDebugText.text = "You reached next point: " + point.pointName + " at index: " + index;
+                triggeredDebugText.text = "You reached next point: " + point.PointName + " at index: " + index;
             });
             
             routeHandler.onFurtherPointReached.AddListener((point, index) =>
             {
-                triggeredDebugText.text = "You reached further point: " + point.pointName + " at index: " + index;
+                triggeredDebugText.text = "You reached further point: " + point.PointName + " at index: " + index;
             });
             
             routeHandler.onAlreadyReachedPointReached.AddListener((point, index) =>
             {
-                triggeredDebugText.text = "already reached point : " + point.pointName + " at index: " + index;
+                triggeredDebugText.text = "already reached point : " + point.PointName + " at index: " + index;
             });
             
             routeHandler.onFinalPointReached.AddListener((point, index) =>
             {
-                triggeredDebugText.text = "Final point reached! : " + point.pointName + " at index: " + index;
+                triggeredDebugText.text = "Final point reached! : " + point.PointName + " at index: " + index;
             });
             
             routeHandler.onFinalPointLeft.AddListener((point, index) =>
             {
-                triggeredDebugText.text = "Final point left! : " + point.pointName + " at index: " + index;
+                triggeredDebugText.text = "Final point left! : " + point.PointName + " at index: " + index;
             });
         }
     }

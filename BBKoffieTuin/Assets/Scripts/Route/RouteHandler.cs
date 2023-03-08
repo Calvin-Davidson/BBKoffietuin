@@ -145,6 +145,15 @@ namespace Route
             routePoint.onPointReached.Invoke();
 
             routePoint.IsTriggered = true;
+            routePoint.HasTriggered = true;
+            
+            //reset all further points to not triggered.
+            for (int i = index + 1; i < ActiveRoute.PointsOfInterest.Count; i++)
+            {
+                var point = ActiveRoute.PointsOfInterest[i];
+                point.IsTriggered = false;
+                point.HasTriggered = false;
+            }
         }
 
         /// <summary>
@@ -157,6 +166,7 @@ namespace Route
             routePoint.onPointReached.Invoke();
             
             routePoint.IsTriggered = true;
+            routePoint.HasTriggered = true;
             
             //check if it is the final point.
             if (routePoint == ActiveRoute.GetFinalPoint())
@@ -169,6 +179,30 @@ namespace Route
             {
                 var point = ActiveRoute.PointsOfInterest[i];
                 point.HasTriggered = true;
+            }
+        }
+
+        public void GoToIndex(int index)
+        {
+            print("clicked index: " + index);
+            bool isPreviousPoint = index < ActiveRoute.GetNextPointToReachIndex();
+            bool isCurrentPoint = index == ActiveRoute.GetNextPointToReachIndex();
+            bool isFurtherPoint = index > ActiveRoute.GetNextPointToReachIndex();
+            
+            RoutePoint clickedPoint = ActiveRoute.PointsOfInterest[index];
+            print(clickedPoint.PointName);
+            
+            if(isPreviousPoint)
+            {
+                ReachedAlreadyReachedPoint(clickedPoint, index);
+            }
+            else if(isCurrentPoint)
+            {
+                ReachedNextPoint(clickedPoint, index);
+            }
+            else if(isFurtherPoint)
+            {
+                ReachedFurtherPoint(clickedPoint, index);
             }
         }
 
