@@ -168,7 +168,7 @@ namespace Route
         /// </summary>
         /// <param name="east"></param>
         /// <param name="west"></param>
-        /// <param name="longitude"></param>
+        /// <param name="longitude"></param>    
         /// <returns></returns>
         private double GetHorizontalPosition(double east, double west, double longitude)
         {
