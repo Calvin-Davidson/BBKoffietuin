@@ -51,7 +51,7 @@ namespace Route
                 if(point.HasTriggered == false) return index;
             }
 
-            return -1;
+            return PointsOfInterest.Count - 1;
         }
 
         public RoutePoint GetFinalPoint()

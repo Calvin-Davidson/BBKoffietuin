@@ -67,7 +67,7 @@ namespace Route
                 {
                     new RoutePoint()
                     {
-                      pointName  = "A",
+                      PointName  = "A",
                       Coordinates = new Coordinates()
                       {
                           latitude = 52.390652,
@@ -76,7 +76,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "B",
+                        PointName  = "B",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.390283,
@@ -85,7 +85,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "C",
+                        PointName  = "C",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.390256,
@@ -94,7 +94,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "D",
+                        PointName  = "D",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.389640,
@@ -103,7 +103,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "E",
+                        PointName  = "E",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.389582,
@@ -112,7 +112,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "F",
+                        PointName  = "F",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.389521,
@@ -121,7 +121,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "G",
+                        PointName  = "G",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.389477,
@@ -130,7 +130,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "H",
+                        PointName  = "H",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.389513,
@@ -139,7 +139,7 @@ namespace Route
                     },
                     new RoutePoint()
                     {
-                        pointName  = "I",
+                        PointName  = "I",
                         Coordinates = new Coordinates()
                         {
                             latitude = 52.389162,

@@ -16,6 +16,9 @@ namespace Route
         [SerializeField] private string routeJson; //second option
         private Route _route;
 
+#if UNITY_EDITOR
+        [SerializeField] private bool gotoMapInEditor = true;
+#endif
         /// <summary>
         /// Awake is called when the script instance is being loaded.
         /// </summary>
@@ -55,6 +58,14 @@ namespace Route
                 //SOMETHING WENT WRONG IN GENERAL!
                 Debug.Log("SOMETHING UNEXPECTED HAPPENED! BUT I DON'T KNOW WHAT!");
             });
+
+#if UNITY_EDITOR
+            if (gotoMapInEditor)
+            {
+                RouteHandler.Instance.ActiveRoute = Route;
+                MenuHandler.Instance.OpenRouteMenu();
+            }
+#endif
         }
 
         private Route Route
@@ -62,12 +73,12 @@ namespace Route
             get
             {
                 if (_route != null) return _route;
-                
+
                 try
                 {
                     //first try from text asset
                     if (textAsset != null)
-                    {   
+                    {
                         _route = JsonConvert.DeserializeObject<Route>(textAsset.text);
                         if (_route != null) return _route;
                     }

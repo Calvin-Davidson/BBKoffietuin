@@ -1,6 +1,8 @@
 using Route;
 using Toolbox.MethodExtensions;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Audio
 {
@@ -10,10 +12,12 @@ namespace Audio
         private AudioSource _audioSource;
         private RouteHandler _routeHandler;
 
+        public UnityEvent onClipChanged = new UnityEvent();
+            
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
-            _routeHandler = FindObjectOfType<RouteHandler>();
+            _routeHandler = RouteHandler.Instance;
         }
 
         private void Start()
@@ -23,21 +27,26 @@ namespace Audio
 
         private void HandlePointReached(RoutePoint point, int index)
         {
-            if (_audioSource.isPlaying) return;
             if (point.AudioPaths.IsEmpty()) return;
-
+            
             int audioIndex = Random.Range(0, point.AudioPaths.Count);
 
-            if (Resources.Load(point.AudioPaths[audioIndex]) == null)
+            var clip = Resources.Load<AudioClip>(point.AudioPaths[audioIndex]);
+            if (clip == null)
             {
                 Debug.LogWarning("Unable to load audio clip from: " + point.AudioPaths[0]);
                 return;
             }
+            
+            _audioSource.Stop();
+            _audioSource.clip = clip;
+            onClipChanged.Invoke();
 
-            Debug.Log(Resources.Load(point.AudioPaths[audioIndex], typeof(AudioClip)) as AudioClip);
-            _audioSource.clip = Resources.Load(point.AudioPaths[audioIndex], typeof(AudioClip)) as AudioClip;
             _audioSource.time = 0;
             _audioSource.Play();
         }
+
+        public AudioSource AudioSource => _audioSource;
+
     }
 }
