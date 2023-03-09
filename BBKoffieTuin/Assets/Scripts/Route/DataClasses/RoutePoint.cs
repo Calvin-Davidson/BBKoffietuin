@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using enums;
 using Generic;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -12,7 +13,8 @@ namespace Route
         //variables
         public string PointName = "default";
         public Coordinates Coordinates;
-        public List<string> AudioPaths = new();
+        public  List<string> AudioPaths = new();
+        public MiniGameOptions MiniGameOptions = MiniGameOptions.None;
 
         [JsonIgnore] public GameObject MarkerGameObject;
         [JsonIgnore] public Color32 ReachedColor = new Color32(100, 100, 100, 255);
