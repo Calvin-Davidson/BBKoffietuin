@@ -1,8 +1,6 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Audio
@@ -88,7 +86,7 @@ namespace Audio
             var timeInSecondsLeft = timeInSeconds % 60;
             var totalTimeInSecondsLeft = totalTimeInSeconds % 60;
 
-            timeSlider.value = audioManager.AudioSource.time / clip.length;
+            timeSlider.SetValueWithoutNotify(audioManager.AudioSource.time / clip.length);
             timeText.text = $"{timeInMinutes:00}:{timeInSecondsLeft:00} / {totalTimeInMinutes:00}:{totalTimeInSecondsLeft:00}";
             clipNameText.text = $"AUDIO: {clip.name}";
         }
