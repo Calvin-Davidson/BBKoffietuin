@@ -4044,7 +4044,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1709607837}
-  - component: {fileID: 1709607838}
   - component: {fileID: 1709607841}
   m_Layer: 5
   m_Name: AudioControllerButton
@@ -4075,20 +4074,6 @@ RectTransform:
   m_AnchoredPosition: {x: -204, y: 265.99997}
   m_SizeDelta: {x: 279.007, y: 279.007}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1709607838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709607836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76341b75a15b98d4993876ca849090bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  northPointerTransform: {fileID: 0}
-  magicPointerTransform: {fileID: 0}
 --- !u!222 &1709607841
 CanvasRenderer:
   m_ObjectHideFlags: 0
