@@ -393,4 +393,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayImage: {fileID: 7720996330981391679}
-  imageFitter: {fileID: 0}

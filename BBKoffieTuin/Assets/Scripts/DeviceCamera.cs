@@ -10,32 +10,6 @@ public class DeviceCamera : MonoBehaviour
     [SerializeField, Tooltip("Used to display the camera's texture")] private RawImage displayImage;
 
     private WebCamTexture _webCamTexture;
-    
-    public AspectRatioFitter imageFitter;
-
-    //set it to either FRONT or BACK
-    string myCamera = "BACK";
-
-    // Device cameras
-    WebCamDevice frontCameraDevice;
-    WebCamDevice backCameraDevice;
-    WebCamDevice activeCameraDevice;
-
-    WebCamTexture frontCameraTexture;
-    WebCamTexture backCameraTexture;
-    WebCamTexture activeCameraTexture;
-
-    // Image rotation
-    Vector3 rotationVector = new Vector3(0f, 0f, 0f);
-
-    // Image uvRect
-    Rect defaultRect = new Rect(0f, 0f, 1f, 1f);
-    Rect fixedRect = new Rect(0f, 1f, 1f, -1f);
-
-    // Image Parent's scale
-    Vector3 defaultScale = new Vector3(1f, 1f, 1f);
-    Vector3 fixedScale = new Vector3(-1f, 1f, 1f);
-    
 
     private void Start()
     {
@@ -48,9 +22,9 @@ public class DeviceCamera : MonoBehaviour
         _webCamTexture = new WebCamTexture(frontCamName);
         _webCamTexture.Play();
 
-        float scale = Math.Min(1920 / _webCamTexture.width, 1080 / _webCamTexture.height);
-        
-        
+        Canvas canvas = displayImage.GetComponentInParent<Canvas>();
+        float scale = Math.Max(canvas.pixelRect.width / _webCamTexture.width, canvas.pixelRect.height / _webCamTexture.height);
+
         displayImage.texture = _webCamTexture;
         displayImage.rectTransform.sizeDelta = new Vector2(_webCamTexture.width * scale, _webCamTexture.height * scale);
     }
@@ -63,19 +37,31 @@ public class DeviceCamera : MonoBehaviour
 
     private IEnumerator TakePictureCoroutine()
     {
-        yield return new WaitForEndOfFrame();
+        var perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
+
+        if (perm == NativeGallery.Permission.ShouldAsk)
+        {
+            NativeGallery.RequestPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
+        }
+       
+        perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
+
+        if (perm == NativeGallery.Permission.Denied) yield break;
+        
+       yield return new WaitForEndOfFrame();
         
         Texture2D photo = new Texture2D(_webCamTexture.width, _webCamTexture.height);
         photo.SetPixels(_webCamTexture.GetPixels());
         photo.Apply();
         
         string pictureName = "BBStories" + System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".png";
-
         //Encode to a PNG
         byte[] bytes = photo.EncodeToPNG();
         //Write out the PNG. Of course you have to substitute your_path for something sensible
-        File.WriteAllBytes(Application.persistentDataPath + $"/{pictureName}.png", bytes);
-        
-        gameObject.SetActive(false);
+
+        NativeGallery.SaveImageToGallery(bytes, "BBStories", pictureName, (success, path) =>
+        {
+            gameObject.SetActive(false);
+        });
     }
 }
