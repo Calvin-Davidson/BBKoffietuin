@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using enums;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace RouteMiniGames
 {
@@ -11,21 +12,21 @@ namespace RouteMiniGames
     [Serializable]
     public class MiniGameSceneManager : MonoBehaviour
     {
-        public GameObject startMenu;
-        public GameObject startingMenu;
-        public GameObject playingMenu;
-        public GameObject endingMenu;
-        public GameObject endedMenu;
+        public GameObject StartMenu;
+        public GameObject StartingMenu;
+        public GameObject PlayingMenu;
+        public GameObject EndingMenu;
+        public GameObject EndedMenu;
         
         Dictionary<MiniGameStates, GameObject> scenes = new Dictionary<MiniGameStates, GameObject>();
 
         public void Awake()
         {
-            scenes.Add(MiniGameStates.StartMenu, startMenu);
-            scenes.Add(MiniGameStates.Starting, startingMenu);
-            scenes.Add(MiniGameStates.Playing, playingMenu);
-            scenes.Add(MiniGameStates.Ending, endingMenu);
-            scenes.Add(MiniGameStates.Ended, endedMenu);
+            scenes.Add(MiniGameStates.StartMenu, StartMenu);
+            scenes.Add(MiniGameStates.Starting, StartingMenu);
+            scenes.Add(MiniGameStates.Playing, PlayingMenu);
+            scenes.Add(MiniGameStates.Ending, EndingMenu);
+            scenes.Add(MiniGameStates.Ended, EndedMenu);
         }
         
         public void DisableAllScenes()

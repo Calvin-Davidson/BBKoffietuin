@@ -9,7 +9,7 @@ namespace RouteMiniGames
 {
     public class MiniGamesController : MonoBehaviour
     {
-        [SerializeField] MiniGamesReferences miniGamesReferences;
+        [SerializeField] private MiniGamesReferences miniGamesReferences;
         [SerializeField] private Button miniGameStartButton;
         
     
