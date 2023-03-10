@@ -143,12 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3611a0d30db4b448736bc00138e653b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenu: {fileID: 7844507900094432451}
-  startingMenu: {fileID: 7844507901591262889}
-  playingMenu: {fileID: 7844507900531987822}
-  pauseMenu: {fileID: 7844507901284032805}
-  endingMenu: {fileID: 7844507900174209843}
-  endedMenu: {fileID: 7844507901267623686}
+  StartMenu: {fileID: 7844507900094432451}
+  StartingMenu: {fileID: 7844507901591262889}
+  PlayingMenu: {fileID: 7844507900531987822}
+  EndingMenu: {fileID: 7844507900174209843}
+  EndedMenu: {fileID: 7844507901267623686}
 --- !u!114 &6904373298079107004
 MonoBehaviour:
   m_ObjectHideFlags: 0
