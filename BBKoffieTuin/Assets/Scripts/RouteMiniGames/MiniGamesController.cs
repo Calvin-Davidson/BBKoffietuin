@@ -38,7 +38,6 @@ namespace RouteMiniGames
         /// </summary>
         private void StartMiniGame()
         {
-            print("starting");
             RoutePoint routePoint = RouteHandler.Instance.ActiveRoutePoint;
             var miniGame = Instantiate(miniGamesReferences.miniGames.First(x => x.type == routePoint.MiniGameOption).obj, transform, true);
             miniGame.transform.localPosition = Vector3.zero;
