@@ -23,9 +23,7 @@ namespace RouteMiniGames
         {
             int currentStateIndex = (int) currentState;
             MiniGameState nextState = (MiniGameState) currentStateIndex + 1;
-            currentState = nextState;
-            onStateChanged.Invoke(nextState);
-            _miniGame.SetState(nextState);
+            CurrentState = nextState;
         }
 
         public MiniGameState CurrentState
@@ -33,6 +31,7 @@ namespace RouteMiniGames
             get => currentState;
             set
             {
+                if (currentState == value) return;
                 currentState = value;
                 _miniGame.SetState(value);
                 onStateChanged.Invoke(value);

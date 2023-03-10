@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using enums;
+using TMPro;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,6 +13,7 @@ namespace RouteMiniGames
     [Serializable]
     public class MiniGameSceneManager : MonoBehaviour
     {
+        [SerializeField] private MiniGameStateManager miniGameStateManager;
         public GameObject StartMenu;
         public GameObject StartingMenu;
         public GameObject PlayingMenu;
@@ -27,6 +29,12 @@ namespace RouteMiniGames
             scenes.Add(MiniGameState.Playing, PlayingMenu);
             scenes.Add(MiniGameState.Ending, EndingMenu);
             scenes.Add(MiniGameState.Ended, EndedMenu);
+            
+            miniGameStateManager.onStateChanged?.AddListener((state) =>
+            {
+                DisableAllScenes();
+                EnableScene(state);
+            });
         }
         
         public void DisableAllScenes()
