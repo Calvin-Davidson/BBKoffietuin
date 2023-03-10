@@ -47,6 +47,10 @@ namespace Audio
                 }
                 else
                 {
+                    if (Math.Abs(audioManager.AudioSource.time - audioManager.AudioSource.clip.length) < .01)
+                    {
+                        audioManager.AudioSource.time = 0;
+                    }
                     audioManager.AudioSource.Play();
                 }
             });
@@ -88,7 +92,7 @@ namespace Audio
             var timeInSecondsLeft = timeInSeconds % 60;
             var totalTimeInSecondsLeft = totalTimeInSeconds % 60;
 
-            timeSlider.value = audioManager.AudioSource.time / clip.length;
+            timeSlider.SetValueWithoutNotify(audioManager.AudioSource.time / clip.length);
             timeText.text = $"{timeInMinutes:00}:{timeInSecondsLeft:00} / {totalTimeInMinutes:00}:{totalTimeInSecondsLeft:00}";
             clipNameText.text = $"AUDIO: {clip.name}";
         }
