@@ -9,13 +9,13 @@ namespace RouteMiniGames
     [Serializable]
     public class MiniGameStateManager : MonoBehaviour
     {
-        [SerializeField] private MiniGame _miniGame;
+        [SerializeField] private MiniGame miniGame;
         [SerializeField] private MiniGameState currentState = MiniGameState.Starting;
         public readonly UnityEvent<MiniGameState> onStateChanged = new UnityEvent<MiniGameState>();
 
         private void Start()
         {
-            _miniGame.SetState(currentState);
+            miniGame.SetState(currentState);
             onStateChanged.Invoke(currentState);
         }
 
@@ -33,7 +33,7 @@ namespace RouteMiniGames
             {
                 if (currentState == value) return;
                 currentState = value;
-                _miniGame.SetState(value);
+                miniGame.SetState(value);
                 onStateChanged.Invoke(value);
             }
         }
