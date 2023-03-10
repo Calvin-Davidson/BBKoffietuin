@@ -12,11 +12,11 @@ namespace RouteMiniGames
 
         private void Awake()
         {
-            _stateActions.Add(MiniGameState.StartMenu, OnStartMenuState);
-            _stateActions.Add(MiniGameState.Starting, OnStartingMenuState);
-            _stateActions.Add(MiniGameState.Playing, OnPlayingMenuState);
-            _stateActions.Add(MiniGameState.Ending, OnEndingMenuState);
-            _stateActions.Add(MiniGameState.Ended, OnEndedMenuState);
+            _stateActions.Add(MiniGameState.StartMenu, OnStartState);
+            _stateActions.Add(MiniGameState.Starting, OnStartingState);
+            _stateActions.Add(MiniGameState.Playing, OnPlayingState);
+            _stateActions.Add(MiniGameState.Ending, OnEndingState);
+            _stateActions.Add(MiniGameState.Ended, OnEndedState);
         }
         
         public void SetState(MiniGameState state)
@@ -25,14 +25,14 @@ namespace RouteMiniGames
         }
 
         //handle state logic
-        protected abstract void OnStartMenuState();
+        protected abstract void OnStartState();
 
-        protected abstract void OnStartingMenuState();
+        protected abstract void OnStartingState();
 
-        protected abstract void OnPlayingMenuState();
+        protected abstract void OnPlayingState();
 
-        protected abstract void OnEndingMenuState();
+        protected abstract void OnEndingState();
 
-        protected abstract void OnEndedMenuState();
+        protected abstract void OnEndedState();
     }
 }
