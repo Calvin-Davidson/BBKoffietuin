@@ -11,8 +11,8 @@ namespace Route
     {
         private Route _activeRoute = null;
         private readonly float _distanceInMetersForTrigger = 15;
-        private RoutePoint activeRoutePoint = null;
-        private int activeRoutePointIndex = -1;
+        private RoutePoint _activeRoutePoint = null;
+        private int _activeRoutePointIndex = -1;
 
         public UnityEvent<RoutePoint, int> onNextPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent<RoutePoint, int> onFurtherPointReached = new UnityEvent<RoutePoint, int>();
@@ -25,7 +25,7 @@ namespace Route
         public override void Awake()
         {
             base.Awake();
-            onPointReached.AddListener(SetActiveRoutePoint);
+            onPointReached.AddListener(UpdateActiveRoutePointCache);
         }
 
 
@@ -217,10 +217,10 @@ namespace Route
             }
         }
         
-        public void SetActiveRoutePoint(RoutePoint point, int index)
+        public void UpdateActiveRoutePointCache(RoutePoint point, int index)
         {
-            activeRoutePoint = point;
-            activeRoutePointIndex = index;
+            _activeRoutePoint = point;
+            _activeRoutePointIndex = index;
         }
 
         #region GETTERS & SETTERS
@@ -240,9 +240,9 @@ namespace Route
             }
         }
 
-        public RoutePoint ActiveRoutePoint => activeRoutePoint;
+        public RoutePoint ActiveRoutePoint => _activeRoutePoint;
 
-        public int ActiveRoutePointIndex => activeRoutePointIndex;
+        public int ActiveRoutePointIndex => _activeRoutePointIndex;
 
         #endregion GETTERS & SETTERS
     }

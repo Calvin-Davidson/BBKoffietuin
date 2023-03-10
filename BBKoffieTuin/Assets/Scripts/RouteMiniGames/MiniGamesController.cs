@@ -21,7 +21,7 @@ namespace RouteMiniGames
             {
                 miniGameStartButton.onClick.RemoveListener(StartMiniGame);
 
-                if (routePoint.MiniGameOptions == MiniGameOptions.None)
+                if (routePoint.MiniGameOption == MiniGameOption.None)
                 {
                     miniGameStartButton.gameObject.SetActive(false);    
                     return;
@@ -40,7 +40,7 @@ namespace RouteMiniGames
         {
             print("starting");
             RoutePoint routePoint = RouteHandler.Instance.ActiveRoutePoint;
-            var miniGame = Instantiate(miniGamesReferences.miniGames.First(x => x.type == routePoint.MiniGameOptions).obj, transform, true);
+            var miniGame = Instantiate(miniGamesReferences.miniGames.First(x => x.type == routePoint.MiniGameOption).obj, transform, true);
             miniGame.transform.localPosition = Vector3.zero;
             miniGame.transform.localScale = Vector3.one;
         }

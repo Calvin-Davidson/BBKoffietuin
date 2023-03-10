@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using enums;
-using Toolbox.Attributes;
 using UnityEngine;
 
 namespace RouteMiniGames
 {
-    public class MiniGame : MonoBehaviour
+    public abstract class MiniGame : MonoBehaviour
     {
         [SerializeField] private MiniGameStateManager stateManager;
         [SerializeField] private MiniGameSceneManager sceneManager;
-        private readonly Dictionary<MiniGameStates, Action> _stateActions = new Dictionary<MiniGameStates, Action>();
+        private readonly Dictionary<MiniGameState, Action> _stateActions = new Dictionary<MiniGameState, Action>();
 
         private void Awake()
         {
-            _stateActions.Add(MiniGameStates.StartMenu, OnStartMenuState);
-            _stateActions.Add(MiniGameStates.Starting, OnStartingMenuState);
-            _stateActions.Add(MiniGameStates.Playing, OnPlayingMenuState);
-            _stateActions.Add(MiniGameStates.Ending, OnEndingMenuState);
-            _stateActions.Add(MiniGameStates.Ended, OnEndedMenuState);
+            _stateActions.Add(MiniGameState.StartMenu, OnStartMenuState);
+            _stateActions.Add(MiniGameState.Starting, OnStartingMenuState);
+            _stateActions.Add(MiniGameState.Playing, OnPlayingMenuState);
+            _stateActions.Add(MiniGameState.Ending, OnEndingMenuState);
+            _stateActions.Add(MiniGameState.Ended, OnEndedMenuState);
         }
 
         private void Start()
         {
-            stateManager.CurrentState = MiniGameStates.StartMenu;
+            stateManager.CurrentState = MiniGameState.StartMenu;
         }
 
         //enable the right scene.
@@ -41,27 +39,14 @@ namespace RouteMiniGames
         }
         
         //handle state logic
-        public void OnStartMenuState()
-        {
-        }
-        
-        public void OnStartingMenuState()
-        {
-        }
-        
-        public void OnPlayingMenuState()
-        {
-        }
+        protected abstract void OnStartMenuState();
 
-        public void OnEndingMenuState()
-        {
-        }
+        protected abstract void OnStartingMenuState();
 
-        public void OnEndedMenuState()
-        {
-            
-            //when the game is ended we can remove the mini game from the scene.
-            Destroy(this.gameObject);
-        }
+        protected abstract void OnPlayingMenuState();
+
+        protected abstract void OnEndingMenuState();
+
+        protected abstract void OnEndedMenuState();
     }
 }

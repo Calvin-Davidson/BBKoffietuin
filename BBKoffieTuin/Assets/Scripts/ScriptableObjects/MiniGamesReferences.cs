@@ -10,7 +10,7 @@ namespace ScriptableObjects
         [System.Serializable]
         public struct MiniGameData
         {
-            public MiniGameOptions type;
+            public MiniGameOption type;
             public GameObject obj;
         }
         

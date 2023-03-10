@@ -18,15 +18,15 @@ namespace RouteMiniGames
         public GameObject EndingMenu;
         public GameObject EndedMenu;
         
-        Dictionary<MiniGameStates, GameObject> scenes = new Dictionary<MiniGameStates, GameObject>();
+        Dictionary<MiniGameState, GameObject> scenes = new Dictionary<MiniGameState, GameObject>();
 
         public void Awake()
         {
-            scenes.Add(MiniGameStates.StartMenu, StartMenu);
-            scenes.Add(MiniGameStates.Starting, StartingMenu);
-            scenes.Add(MiniGameStates.Playing, PlayingMenu);
-            scenes.Add(MiniGameStates.Ending, EndingMenu);
-            scenes.Add(MiniGameStates.Ended, EndedMenu);
+            scenes.Add(MiniGameState.StartMenu, StartMenu);
+            scenes.Add(MiniGameState.Starting, StartingMenu);
+            scenes.Add(MiniGameState.Playing, PlayingMenu);
+            scenes.Add(MiniGameState.Ending, EndingMenu);
+            scenes.Add(MiniGameState.Ended, EndedMenu);
         }
         
         public void DisableAllScenes()
@@ -38,7 +38,7 @@ namespace RouteMiniGames
             }
         }
 
-        public void EnableScene(MiniGameStates state)
+        public void EnableScene(MiniGameState state)
         {
             if (!scenes.ContainsKey(state)) return;
             GameObject scene = scenes[state];

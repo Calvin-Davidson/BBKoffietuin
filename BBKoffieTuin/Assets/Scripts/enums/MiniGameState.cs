@@ -1,6 +1,6 @@
 ﻿namespace enums
 {
-    public enum MiniGameStates
+    public enum MiniGameState
     {
         StartMenu,
         Starting,

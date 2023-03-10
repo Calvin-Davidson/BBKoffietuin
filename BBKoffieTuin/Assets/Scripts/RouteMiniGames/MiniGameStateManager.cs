@@ -2,26 +2,25 @@ using System;
 using enums;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace RouteMiniGames
 {
     [Serializable]
     public class MiniGameStateManager : MonoBehaviour
     {
-        [SerializeField] private MiniGameStates currentState = MiniGameStates.Starting;
+        [SerializeField] private MiniGameState currentState = MiniGameState.Starting;
+        public readonly UnityEvent<MiniGameState> onStateChanged = new UnityEvent<MiniGameState>();
 
-        public readonly UnityEvent<MiniGameStates> onStateChanged = new UnityEvent<MiniGameStates>();
-        
-        
         public void GotoNextStage()
         {
             int currentStateIndex = (int) currentState;
-            MiniGameStates nextState = (MiniGameStates) currentStateIndex + 1;
+            MiniGameState nextState = (MiniGameState) currentStateIndex + 1;
             currentState = nextState;
             onStateChanged.Invoke(nextState);
         }
 
-        public MiniGameStates CurrentState
+        public MiniGameState CurrentState
         {
             get => currentState;
             set
