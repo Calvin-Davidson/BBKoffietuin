@@ -7,7 +7,6 @@ namespace RouteMiniGames
 {
     public abstract class MiniGame : MonoBehaviour
     {
-        [SerializeField] private MiniGameStateManager stateManager;
         [SerializeField] private MiniGameSceneManager sceneManager;
         private readonly Dictionary<MiniGameState, Action> _stateActions = new Dictionary<MiniGameState, Action>();
 
@@ -19,25 +18,12 @@ namespace RouteMiniGames
             _stateActions.Add(MiniGameState.Ending, OnEndingMenuState);
             _stateActions.Add(MiniGameState.Ended, OnEndedMenuState);
         }
-
-        private void Start()
-        {
-            stateManager.CurrentState = MiniGameState.StartMenu;
-        }
-
-        //enable the right scene.
-        private void OnEnable()
-        {
-            sceneManager.EnableScene(stateManager.CurrentState);
-            stateManager.onStateChanged.AddListener(sceneManager.EnableScene);
-            stateManager.onStateChanged.AddListener((state) => _stateActions[state].Invoke());
-        }
-
-        private void OnDisable()
-        {
-            stateManager.onStateChanged.RemoveListener(sceneManager.EnableScene);
-        }
         
+        public void SetState(MiniGameState state)
+        {
+            _stateActions[state].Invoke();
+        }
+
         //handle state logic
         protected abstract void OnStartMenuState();
 
