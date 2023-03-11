@@ -1,6 +1,6 @@
 ﻿namespace enums
 {
-    public enum MiniGameOptions
+    public enum MiniGameOption
     {
         None,
         TakePicture,
