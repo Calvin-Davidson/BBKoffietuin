@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Generic;
+using Newtonsoft.Json;
+using Toolbox.Attributes;
 using Toolbox.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,6 +23,14 @@ namespace Route
         public UnityEvent<RoutePoint, int> onFinalPointReached = new UnityEvent<RoutePoint, int>();
         public UnityEvent<RoutePoint, int> onFinalPointLeft = new UnityEvent<RoutePoint, int>();
         public UnityEvent onRouteChanged = new UnityEvent();
+
+        [Button]
+        public void DebugRoute()
+        {
+            print(ActiveRoute.RouteCode);
+            print(ActiveRoute.RouteCode.Count);
+            print(JsonConvert.SerializeObject(ActiveRoute.RouteCode));
+        }   
 
         public override void Awake()
         {
@@ -236,6 +246,7 @@ namespace Route
                 if (_activeRoute == value) return;
 
                 _activeRoute = value;
+                _activeRoute.InitializeRoute();
                 onRouteChanged?.Invoke();
             }
         }

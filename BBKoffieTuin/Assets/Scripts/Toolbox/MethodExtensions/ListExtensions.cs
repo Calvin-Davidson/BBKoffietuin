@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Random = System.Random;
+using UnityEngine;
 
 namespace Toolbox.MethodExtensions
 {
@@ -69,6 +69,34 @@ namespace Toolbox.MethodExtensions
         public static List<TU> ConvertListItemsTo<TY, TU>(this IList<TY> oldList) where TU : class
         {
             return oldList.Select(oldItem => oldItem as TU).ToList();
+        }
+
+        
+        /// <summary>
+        /// Gets a new list with random items from the given list 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="list"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static List<T> GetRandomItems<T>(this List<T> list, int amount)
+        {
+            var resultList = new List<T>();
+            var duplicateList = new List<T>(list);
+
+            for (int i = 0; i < amount; i++)
+            {
+                //random index
+                var randomIndex = Random.Range(0, duplicateList.Count);
+                //get item from random index
+                var randomItem = duplicateList[randomIndex];
+                //add item to result list
+                resultList.Add(randomItem);
+                //remove item from duplicate list
+                duplicateList.RemoveAt(randomIndex);
+            }
+            
+            return resultList;
         }
     }
 }
