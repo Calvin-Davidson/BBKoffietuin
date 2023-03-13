@@ -24,14 +24,14 @@ namespace Route
         private void OnEnable()
         {
             routeHandler.onRouteChanged.AddListener(InitializeMap);
-            PhoneDirection.Instance.onNortherPointChange.AddListener(UpdateUserRotation);
+            PhoneDirection.Instance.onTargetPointChange.AddListener(UpdateUserRotation);
             InitializeMap();
         }
 
         private void OnDisable()
         {
             routeHandler.onRouteChanged.RemoveListener(InitializeMap);
-            PhoneDirection.Instance.onNortherPointChange.RemoveListener(UpdateUserRotation);
+            PhoneDirection.Instance.onTargetPointChange.RemoveListener(UpdateUserRotation);
         }
 
         private void Update()
