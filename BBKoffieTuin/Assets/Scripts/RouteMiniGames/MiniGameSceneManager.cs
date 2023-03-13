@@ -19,7 +19,6 @@ namespace RouteMiniGames
         public GameObject PlayingMenu;
         public GameObject EndingMenu;
         public GameObject EndedMenu;
-        private MiniGameState _currentState = MiniGameState.Inactive;
         
         Dictionary<MiniGameState, GameObject> scenes = new Dictionary<MiniGameState, GameObject>();
 
@@ -33,8 +32,6 @@ namespace RouteMiniGames
             
             miniGameStateManager.onStateChanged?.AddListener((state) =>
             {
-                if (_currentState == MiniGameState.Inactive && state != _currentState) return;
-                
                 DisableAllScenes();
                 EnableScene(state);
             });
@@ -52,7 +49,6 @@ namespace RouteMiniGames
         public void EnableScene(MiniGameState state)
         {
             if (!scenes.ContainsKey(state)) return;
-            _currentState = state;
             GameObject scene = scenes[state];
             if(scene == null) return;
             DisableAllScenes();

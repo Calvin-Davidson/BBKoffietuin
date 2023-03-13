@@ -5,6 +5,6 @@
         None,
         TakePicture,
         FindAllObjects,
-        AnimalQuiz
+        CreateVoiceStory,
     }
 }
