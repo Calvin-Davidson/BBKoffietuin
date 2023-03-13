@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Toolbox.MethodExtensions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Quiz
@@ -12,9 +14,15 @@ namespace Quiz
     {
         [SerializeField] private TextMeshProUGUI questionText;
         [SerializeField] private List<Button> buttons;
+        [SerializeField] private float renderDelay;
+        
+        
         private QuizManager _quizManager;
         private Button _correctButton;
 
+        public UnityEvent onRenderStarted = new();
+        public UnityEvent onRenderComplete = new();
+        
         private void Awake()
         {
             _quizManager = FindObjectOfType<QuizManager>();
@@ -30,6 +38,13 @@ namespace Quiz
         /// <param name="question">The new question we ask</param>
         private void Render(QuizQuestion question)
         {
+            StartCoroutine(RenderWithDelay(question));
+        }
+
+        private IEnumerator RenderWithDelay(QuizQuestion question)
+        {
+            onRenderStarted?.Invoke();
+            yield return new WaitForSeconds(renderDelay);
             List<QuizQuestion> otherQuestions = _quizManager.Questions.Where(quizQuestion => question != quizQuestion).ToList().Shuffle();
             buttons = buttons.Shuffle();
             
@@ -41,6 +56,7 @@ namespace Quiz
             {
                 buttons[i].GetComponent<Image>().sprite = otherQuestions[i-1].Sprite;
             }
+            onRenderComplete?.Invoke();
         }
 
         private void HandleButtonPress(Button button)
