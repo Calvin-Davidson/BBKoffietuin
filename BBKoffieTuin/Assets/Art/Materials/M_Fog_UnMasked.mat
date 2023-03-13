@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Fog
+  m_Name: M_Fog_UnMasked
   m_Shader: {fileID: -6465566751694194690, guid: 427641a4bc0bd5d47bb44e220ea2ba97,
     type: 3}
   m_ValidKeywords: []
@@ -32,7 +32,7 @@ Material:
     - _MaskCenter: 0
     - _Multply_Time: 0.1
     - _NooiseSize: 2.53
-    - _maskCenter: 1
+    - _maskCenter: 0
     m_Colors:
     - _FogMainColor: {r: 0.9103774, g: 0.9944349, b: 1, a: 0}
     - _FogShadowColor: {r: 0.62357605, g: 0.764151, b: 0.7331998, a: 1}
