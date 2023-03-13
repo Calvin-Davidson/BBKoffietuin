@@ -36,14 +36,6 @@ public class MapZoom : MonoBehaviour
 
         Touch firstTouch = Input.GetTouch(0);
         Touch secondTouch = Input.GetTouch(1);
-
-        //check if the touches are both on the UI element
-        // Ray firstRay = _camera.ScreenPointToRay(firstTouch.position);
-        // Ray secondRay = _camera.ScreenPointToRay(secondTouch.position);
-
-        // Check if the touches are on the current element
-        // if (!Physics.Raycast(firstRay, out RaycastHit firstHit) || firstHit.transform != transform) return;
-        // if (!Physics.Raycast(secondRay, out RaycastHit secondHit) || secondHit.transform != transform) return;
         
         //the logic of zooming in and out 
         _firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
