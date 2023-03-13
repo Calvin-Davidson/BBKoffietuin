@@ -160,7 +160,7 @@ namespace Route
         /// <param name="newRotation"></param>
         private void UpdateUserRotation(float newRotation)
         {
-            _userRect.rotation = Quaternion.Euler(new Vector3(0,0,newRotation));
+            _userRect.rotation = Quaternion.Euler(new Vector3(0,0,newRotation - 180));
         }
 
         /// <summary>
