@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using File = System.IO.File;
 
@@ -11,6 +12,8 @@ public class DeviceCamera : MonoBehaviour
 
     private WebCamTexture _webCamTexture;
 
+    public UnityEvent onPictureComplete = new();
+    
     private void Start()
     {
         StartWebCam();
@@ -37,16 +40,12 @@ public class DeviceCamera : MonoBehaviour
 
     private IEnumerator TakePictureCoroutine()
     {
-        var perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
-
-        if (perm == NativeGallery.Permission.ShouldAsk)
+        var perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Write, NativeGallery.MediaType.Image);
+        if (perm == NativeGallery.Permission.Denied)
         {
-            NativeGallery.RequestPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
+            gameObject.SetActive(false);
+            yield break;
         }
-       
-        perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
-
-        if (perm == NativeGallery.Permission.Denied) yield break;
         
        yield return new WaitForEndOfFrame();
         
@@ -61,7 +60,7 @@ public class DeviceCamera : MonoBehaviour
 
         NativeGallery.SaveImageToGallery(bytes, "BBStories", pictureName, (success, path) =>
         {
-            gameObject.SetActive(false);
+            onPictureComplete?.Invoke();
         });
     }
 }

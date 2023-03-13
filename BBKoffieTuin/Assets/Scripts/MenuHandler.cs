@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MenuHandler : MonoSingleton<MenuHandler>
 {
-    [SerializeReference] private GameObject mainMenu;
     [SerializeReference] private GameObject routeMenu;
     
     public void OpenRouteMenu()
@@ -15,12 +14,10 @@ public class MenuHandler : MonoSingleton<MenuHandler>
     public void OpenMainMenu()
     {
         DisableAllMenus();
-        mainMenu.SetActive(true);
     }
 
     public void DisableAllMenus()
     {
-        mainMenu.SetActive(false);
         routeMenu.SetActive(false);
     }
 

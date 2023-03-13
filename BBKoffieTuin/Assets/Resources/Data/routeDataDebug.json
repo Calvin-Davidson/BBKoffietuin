@@ -30,9 +30,8 @@
         "altitude": 0.0
       },
       "AudioPaths": [
-        "Audio/GameParts/A_PictureIntro"
       ],
-      "MiniGameOption": 1
+      "MiniGameOption": 3
     },
     {
       "pointName": "C",
@@ -42,9 +41,8 @@
         "altitude": 0.0
       },
       "AudioPaths": [
-        "Audio/GameParts/A_ScavengerHuntIntro"
       ],
-      "MiniGameOption": 2
+      "MiniGameOption": 1
     },
     {
       "pointName": "D",
@@ -54,7 +52,7 @@
         "altitude": 0.0
       },
       "AudioPaths": [],
-      "MiniGameOption": 0
+      "MiniGameOption": 2
     },
     {
       "pointName": "E",
@@ -66,7 +64,7 @@
       "AudioPaths": [
         "Audio/GameParts/A_StoryTellingIntro"
       ],
-      "MiniGameOption": 0  
+      "MiniGameOption": 0
     }
   ]
 }

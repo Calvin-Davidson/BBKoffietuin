@@ -8,7 +8,7 @@ namespace Toolbox.MethodExtensions
     public static class ListExtensions
     {
         /// <summary>
-        /// Checks if the list is empty 
+        /// Checks if the list is empty
         /// </summary>
         /// <param name="target"></param>
         /// <typeparam name="T"></typeparam>
@@ -17,10 +17,10 @@ namespace Toolbox.MethodExtensions
         {
             return target.Count == 0;
         }
-        
-        
+
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="list"></param>
         /// <param name="index"></param>
@@ -35,7 +35,7 @@ namespace Toolbox.MethodExtensions
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="list"></param>
         /// <param name="index"></param>
@@ -62,7 +62,7 @@ namespace Toolbox.MethodExtensions
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="oldList"></param>
         /// <typeparam name="TY"></typeparam>
@@ -72,9 +72,9 @@ namespace Toolbox.MethodExtensions
             return oldList.Select(oldItem => oldItem as TU).ToList();
         }
 
-        
+
         /// <summary>
-        /// Gets a new list with random items from the given list 
+        /// Gets a new list with random items from the given list
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="list"></param>
@@ -87,7 +87,7 @@ namespace Toolbox.MethodExtensions
 
             for (int i = 0; i < amount; i++)
             {
-                //random index 
+                //random index
                 var randomIndex = Random.Range(0, duplicateList.Count);
                 //get item from random index
                 var randomItem = duplicateList[randomIndex];
@@ -96,7 +96,7 @@ namespace Toolbox.MethodExtensions
                 //remove item from duplicate list
                 duplicateList.RemoveAt(randomIndex);
             }
-            
+
             return resultList;
         }
     }
