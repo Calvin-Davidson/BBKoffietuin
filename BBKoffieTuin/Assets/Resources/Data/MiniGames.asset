@@ -16,6 +16,6 @@ MonoBehaviour:
   - type: 1
     obj: {fileID: 7572451141585066201, guid: 17a36307cda978f4c8756ea6ed608309, type: 3}
   - type: 2
-    obj: {fileID: 7844507900307471972, guid: 55e3ac48f16f8d4419604228ac6528a6, type: 3}
+    obj: {fileID: 7572451141585066201, guid: 777ae48cf41609d4384bed5ddb550fb2, type: 3}
   - type: 3
     obj: {fileID: 7572451141585066201, guid: c8c8b2ca6297cbe42b7f376a05157108, type: 3}
