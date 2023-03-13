@@ -1345,6 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionsToDo: 3
+  startOnEnable: 1
   questions:
   - question: Op welk plaatje is een vlinder te zien
     sprite: {fileID: 21300000, guid: eff00e2d6ac001b4987161ebb1c459dc, type: 3}
@@ -1354,13 +1355,24 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
   - question: Op welk plaatje is een vlinder te zien
     sprite: {fileID: 21300000, guid: 144aa74618b85974a9a50f612c2fa8fd, type: 3}
-  startOnEnable: 1
   onNewQuestion:
     m_PersistentCalls:
       m_Calls: []
   onGameComplete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7572451141585066201}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &475315789582912363
 MonoBehaviour:
   m_ObjectHideFlags: 0
