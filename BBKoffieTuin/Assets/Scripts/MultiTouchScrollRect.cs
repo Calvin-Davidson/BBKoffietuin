@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class MultiTouchScrollRect : ScrollRect
 {
     #region Fields
-    private int minimumTouchCount = 1, maximumTouchCount = 2, initialTouchCount = 0;
+    private int _minimumTouchCount = 1;
+    private int _maximumTouchCount = 2;
+    private int _initialTouchCount = 0;
     #endregion
 
     #region Properties
@@ -14,11 +16,11 @@ public class MultiTouchScrollRect : ScrollRect
         get
         {
             Vector2 position = Vector2.zero;
-            for (int i = 0; i < Input.touchCount && i < maximumTouchCount; i++)
+            for (int i = 0; i < Input.touchCount && i < _maximumTouchCount; i++)
             {
                 position += Input.touches[i].position;
             }
-            position /= ((Input.touchCount <= maximumTouchCount) ? Input.touchCount : maximumTouchCount);
+            position /= ((Input.touchCount <= _maximumTouchCount) ? Input.touchCount : _maximumTouchCount);
 
             return position;
         }
@@ -32,14 +34,14 @@ public class MultiTouchScrollRect : ScrollRect
         {
             if (Input.touchCount > 0)
             {
-                if (initialTouchCount == 0)
+                if (_initialTouchCount == 0)
                 {
-                    initialTouchCount = Input.touchCount;
+                    _initialTouchCount = Input.touchCount;
                 }
             }
             else
             {
-                initialTouchCount = 0;
+                _initialTouchCount = 0;
             }
         }
     }
@@ -48,11 +50,9 @@ public class MultiTouchScrollRect : ScrollRect
     {
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
-            if (Input.touchCount >= minimumTouchCount && Input.touchCount == initialTouchCount)
-            {
-                eventData.position = MultiTouchPosition;
-                base.OnBeginDrag(eventData);
-            }
+            if (Input.touchCount < _minimumTouchCount || Input.touchCount != _initialTouchCount) return;
+            eventData.position = MultiTouchPosition;
+            base.OnBeginDrag(eventData);
         }
         else if (SystemInfo.deviceType == DeviceType.Desktop)
         {
@@ -63,11 +63,9 @@ public class MultiTouchScrollRect : ScrollRect
     {
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
-            if (Input.touchCount >= minimumTouchCount && Input.touchCount == initialTouchCount)
-            {
-                eventData.position = MultiTouchPosition;
-                base.OnDrag(eventData);
-            }
+            if (Input.touchCount < _minimumTouchCount || Input.touchCount != _initialTouchCount) return;
+            eventData.position = MultiTouchPosition;
+            base.OnDrag(eventData);
         }
         else if (SystemInfo.deviceType == DeviceType.Desktop)
         {
@@ -78,11 +76,9 @@ public class MultiTouchScrollRect : ScrollRect
     {
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
-            if (Input.touchCount >= minimumTouchCount)
-            {
-                eventData.position = MultiTouchPosition;
-                base.OnEndDrag(eventData);
-            }
+            if (Input.touchCount < _minimumTouchCount) return;
+            eventData.position = MultiTouchPosition;
+            base.OnEndDrag(eventData);
         }
         else if (SystemInfo.deviceType == DeviceType.Desktop)
         {

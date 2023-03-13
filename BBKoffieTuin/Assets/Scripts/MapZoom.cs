@@ -9,17 +9,19 @@ using UnityEngine.UI;
 /// </summary>
 public class MapZoom : MonoBehaviour
 {
-    private Camera _camera;
-
-    float _touchesPrevPosDifference, _touchesCurPosDifference, _zoomModifier;
-
-    Vector2 _firstTouchPrevPos, _secondTouchPrevPos;
-
     [SerializeField] private float currentZoom = 1f;
     [SerializeField] float zoomModifierSpeed = 0.1f;
     [SerializeField] float zoomOutMax = 1f;
     [SerializeField] float zoomInMax = .1f;
+    
+    private Camera _camera;
 
+    private float _touchesPrevPosDifference;
+    private float _touchesCurPosDifference;
+    private float _zoomModifier;
+
+    private Vector2 _firstTouchPrevPos;
+    private Vector2 _secondTouchPrevPos;
 
     private void Awake()
     {
