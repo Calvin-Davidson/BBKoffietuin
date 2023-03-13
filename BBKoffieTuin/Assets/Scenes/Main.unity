@@ -876,6 +876,7 @@ RectTransform:
   m_Children:
   - {fileID: 89494902}
   - {fileID: 721058594}
+  - {fileID: 1910544096}
   m_Father: {fileID: 8056705}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1583,7 +1584,6 @@ RectTransform:
   - {fileID: 1012341179}
   - {fileID: 689226560}
   - {fileID: 1709607837}
-  - {fileID: 1910544096}
   m_Father: {fileID: 8056705}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4016,7 +4016,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 516111703}
+    m_TransformParent: {fileID: 154330411}
     m_Modifications:
     - target: {fileID: 5328139531716623169, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
@@ -4051,7 +4051,7 @@ PrefabInstance:
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
@@ -4106,17 +4106,17 @@ PrefabInstance:
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
@@ -4126,7 +4126,7 @@ PrefabInstance:
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1650
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5328139532145893028, guid: e80d4fa32e78d1f4593fec0103f8b492,
         type: 3}
