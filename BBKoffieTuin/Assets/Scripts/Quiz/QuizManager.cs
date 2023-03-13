@@ -16,6 +16,7 @@ namespace Quiz
         private int _questionsDone = 0;
         private int _correctAnswerCount = 0;
         private readonly List<QuizQuestion> _previousQuestions = new();
+        private QuizQuestion _currentQuestion;
 
         [Space] public UnityEvent<QuizQuestion> onNewQuestion = new();
         [Tooltip("Invoked when the game end, with the amount of correct answers as value")]
@@ -23,18 +24,23 @@ namespace Quiz
 
         public List<QuizQuestion> Questions => new(questions);
 
+        public QuizQuestion CurrentQuestion => _currentQuestion;
+
         private void OnEnable()
         {
+            Debug.Log("On enable");
             if (startOnEnable) DoNextQuestion();
         }
 
         private void DoNextQuestion()
         {
+            Debug.Log("Starting next question");
             QuizQuestion nextQuestions =
                 questions.Where(question => !_previousQuestions.Contains(question)).ToList().Shuffle().First();
 
             _previousQuestions.Add(nextQuestions);
             onNewQuestion?.Invoke(nextQuestions);
+            _currentQuestion = nextQuestions;
         }
 
         public void HandleAnswerCorrect()

@@ -17,10 +17,12 @@ namespace Quiz
 
         private void Awake()
         {
+            Debug.Log("Awaking quiz renderer");
             _quizManager = FindObjectOfType<QuizManager>();
             _quizManager.onNewQuestion.AddListener(Render);
             
             buttons.ForEach(button => button.onClick.AddListener(() => HandleButtonPress(button)));
+            Render(_quizManager.CurrentQuestion);
         }
 
         /// <summary>
@@ -29,6 +31,7 @@ namespace Quiz
         /// <param name="question">The new question we ask</param>
         private void Render(QuizQuestion question)
         {
+            Debug.Log("Rendering quiz");
             List<QuizQuestion> otherQuestions = _quizManager.Questions.Where(quizQuestion => question != quizQuestion).ToList().Shuffle();
             buttons = buttons.Shuffle();
             
