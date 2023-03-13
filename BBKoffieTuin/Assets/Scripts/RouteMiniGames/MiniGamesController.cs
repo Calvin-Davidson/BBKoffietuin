@@ -36,8 +36,6 @@ namespace RouteMiniGames
         private void StartMiniGame()
         {
             RoutePoint routePoint = RouteHandler.Instance.ActiveRoutePoint;
-            Debug.Log(routePoint.MiniGameOption);
-            Debug.Log(miniGamesReferences.miniGames.First(x => x.type == routePoint.MiniGameOption).obj.name);
             Instantiate(miniGamesReferences.miniGames.First(x => x.type == routePoint.MiniGameOption).obj);
         }
     }
