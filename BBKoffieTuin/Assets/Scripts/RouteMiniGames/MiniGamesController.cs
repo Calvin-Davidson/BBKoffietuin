@@ -10,29 +10,23 @@ namespace RouteMiniGames
     public class MiniGamesController : MonoBehaviour
     {
         [SerializeField] private MiniGamesReferences miniGamesReferences;
-        [SerializeField] private Button miniGameStartButton;
-        
-    
-        private void Awake()
-        {
-            miniGameStartButton.gameObject.SetActive(false);
-            //enable the start game button based on if the route point has an mini game.
-            RouteHandler.Instance.onPointReached.AddListener((routePoint, i) =>
-            {
-                miniGameStartButton.onClick.RemoveListener(StartMiniGame);
 
-                if (routePoint.MiniGameOption == MiniGameOption.None)
-                {
-                    miniGameStartButton.gameObject.SetActive(false);    
-                    return;
-                }
-                
-                miniGameStartButton.onClick.AddListener(StartMiniGame);
-                miniGameStartButton.gameObject.SetActive(true);
-            });
+        private void Start()
+        {
+            RouteHandler.Instance.onRouteChanged.AddListener(HandleRouteChange);
             
         }
 
+        private void HandleRouteChange()
+        {
+            //enable the start game button based on if the route point has an mini game.
+            RouteHandler.Instance.onPointReached.AddListener((routePoint, i) =>
+            {
+                if (routePoint.MiniGameOption == MiniGameOption.None) return;
+                StartMiniGame();
+            });
+        }
+        
         /// <summary>
         /// Spawns the mini game prefab 
         /// </summary>

@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RouteMiniGames;
 using Toolbox.MethodExtensions;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Quiz
 {
-    public class QuizManager : MonoBehaviour
+    public class QuizManager : MiniGame
     {
         [SerializeField] private int questionsToDo = 3;
         [SerializeField] private bool startOnEnable = false;
@@ -63,6 +64,26 @@ namespace Quiz
             }
 
             return false;
+        }
+
+        protected override void OnStartState()
+        {
+        }
+
+        protected override void OnStartingState()
+        {
+        }
+
+        protected override void OnPlayingState()
+        {
+        }
+
+        protected override void OnEndingState()
+        {
+        }
+
+        protected override void OnEndedState()
+        {
         }
     }
 }

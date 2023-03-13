@@ -2,6 +2,7 @@
 {
     public enum MiniGameState
     {
+        Inactive,
         StartMenu,
         Starting,
         Playing,
