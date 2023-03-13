@@ -28,13 +28,11 @@ namespace Quiz
 
         private void OnEnable()
         {
-            Debug.Log("On enable");
             if (startOnEnable) DoNextQuestion();
         }
 
         private void DoNextQuestion()
         {
-            Debug.Log("Starting next question");
             QuizQuestion nextQuestions =
                 questions.Where(question => !_previousQuestions.Contains(question)).ToList().Shuffle().First();
 
