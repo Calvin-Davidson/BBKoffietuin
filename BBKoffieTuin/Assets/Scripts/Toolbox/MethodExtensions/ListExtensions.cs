@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Toolbox.MethodExtensions
@@ -86,7 +87,7 @@ namespace Toolbox.MethodExtensions
 
             for (int i = 0; i < amount; i++)
             {
-                //random index
+                //random index 
                 var randomIndex = Random.Range(0, duplicateList.Count);
                 //get item from random index
                 var randomItem = duplicateList[randomIndex];

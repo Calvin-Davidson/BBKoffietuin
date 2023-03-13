@@ -6,13 +6,14 @@ using Generic;
 using Newtonsoft.Json;
 using Toolbox.MethodExtensions;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Route
 {
     public class Route
     {
-        private int _codeSize = 4;
+        public int CodeSize = 4;
         public List<char> RouteCode = new List<char>();
 
         public string routeName = "";
@@ -26,6 +27,7 @@ namespace Route
         [JsonIgnore] private Texture _imageTexture;
         [JsonIgnore] private readonly Dictionary<string, List<char>> _miniGamesWithCode = new Dictionary<string, List<char>>();
 
+        public Dictionary<string, List<char>> MiniGamesWithCode => _miniGamesWithCode;
 
         /// <summary>
         /// Get the next point to reach in the route
@@ -72,10 +74,11 @@ namespace Route
 
         public void InitializeRoute()
         {
+            Debug.Log("INITIALZIE");
             //if the route code is smaller then the code size, fill it with random characters
-            if (RouteCode.Count < _codeSize)
+            if (RouteCode.Count < CodeSize)
             {
-                while (RouteCode.Count < _codeSize)
+                while (RouteCode.Count < CodeSize)
                 {
                     var random = UnityEngine.Random.Range(0, 10);
                     RouteCode.Add(random.ToString()[0]);
@@ -84,10 +87,10 @@ namespace Route
             
             
             //if the route code is to long make it shorter
-            if (RouteCode.Count > _codeSize)
+            if (RouteCode.Count > CodeSize)
             {
                 List<char> newCode = new List<char>();
-                for (int i = 0; i < _codeSize; i++)
+                for (int i = 0; i < CodeSize; i++)
                 {
                     newCode[i] = RouteCode[i];
                 }
@@ -103,19 +106,17 @@ namespace Route
             }
             
             //create a list called chosenGames this should be a list with 4 RoutePoints that are also in pointsWithGame with no duplicates
-            List<RoutePoint> chosenGames = pointsWithGame.GetRandomItems(_codeSize);
-
-
-            if (pointsWithGame.Count >= _codeSize)
+            List<RoutePoint> chosenGames = pointsWithGame.GetRandomItems(pointsWithGame.Count > CodeSize ? CodeSize : pointsWithGame.Count);
+            if (pointsWithGame.Count >= CodeSize)
             {
-                for (int i = 0; i < _codeSize; i++)
+                for (int i = 0; i < CodeSize; i++)
                 {
                     _miniGamesWithCode.Add(chosenGames[i].MiniGameOption.ToString(), new List<char>() { RouteCode[i] });
                 }
             }
             
             //if we have less games then codeSize we need to add multiple codes to miniGamesWithCode
-            if (pointsWithGame.Count < _codeSize)
+            if (pointsWithGame.Count < CodeSize)
             {
                 //initial fill of the dictionary
                 for (int i = 0; i < chosenGames.Count; i++)
@@ -124,12 +125,13 @@ namespace Route
                 }
                 
                 //for all codes that are not used yet we add them to the list of each game starting by the first.
-                int codesLeftCount = _codeSize - chosenGames.Count;
+                int codesLeftCount = CodeSize - chosenGames.Count;
                 int index = 0;
                 for (int i = 0; i < codesLeftCount; i++)
                 {
                     if(index >= chosenGames.Count) index = 0;
-                    _miniGamesWithCode[chosenGames[index].PointName].Add(RouteCode[i]);
+                    _miniGamesWithCode[chosenGames[index].PointName].Add(RouteCode[i + (CodeSize - codesLeftCount)]);
+                    index++;
                 }
             }
 

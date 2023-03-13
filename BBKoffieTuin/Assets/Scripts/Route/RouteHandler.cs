@@ -30,6 +30,10 @@ namespace Route
             print(ActiveRoute.RouteCode);
             print(ActiveRoute.RouteCode.Count);
             print(JsonConvert.SerializeObject(ActiveRoute.RouteCode));
+            print(JsonConvert.SerializeObject(ActiveRoute.MiniGamesWithCode, Formatting.Indented));
+            print(ActiveRoute.MiniGamesWithCode.Count);
+            print(ActiveRoute.MiniGamesWithCode.Keys);
+            print(ActiveRoute.MiniGamesWithCode.Keys.Count);
         }   
 
         public override void Awake()
