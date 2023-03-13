@@ -45,6 +45,10 @@ namespace Audio
                 }
                 else
                 {
+                    if (Math.Abs(audioManager.AudioSource.time - audioManager.AudioSource.clip.length) < .01)
+                    {
+                        audioManager.AudioSource.time = 0;
+                    }
                     audioManager.AudioSource.Play();
                 }
             });

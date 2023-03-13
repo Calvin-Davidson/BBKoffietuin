@@ -14,7 +14,7 @@ namespace Route
         public string PointName = "default";
         public Coordinates Coordinates;
         public  List<string> AudioPaths = new();
-        public MiniGameOptions MiniGameOptions = MiniGameOptions.None;
+        public MiniGameOption MiniGameOption = MiniGameOption.None;
 
         [JsonIgnore] public GameObject MarkerGameObject;
         [JsonIgnore] public Color32 ReachedColor = new Color32(100, 100, 100, 255);
