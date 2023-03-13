@@ -1683,7 +1683,7 @@ MonoBehaviour:
   - {fileID: 6588439951227413244}
   - {fileID: 3884729094831175266}
   - {fileID: 4572196090005241870}
-  renderDelay: 0.6
+  renderDelay: 0.62
   onRenderStarted:
     m_PersistentCalls:
       m_Calls:
