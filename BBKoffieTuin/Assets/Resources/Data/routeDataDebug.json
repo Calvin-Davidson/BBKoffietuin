@@ -29,7 +29,6 @@
         "altitude": 0.0
       },
       "AudioPaths": [
-        "Audio/GameParts/A_PictureIntro"
       ],
       "MiniGameOption": 3
     },
@@ -41,9 +40,8 @@
         "altitude": 0.0
       },
       "AudioPaths": [
-        "Audio/GameParts/A_ScavengerHuntIntro"
       ],
-      "MiniGameOption": 0
+      "MiniGameOption": 1
     },
     {
       "pointName": "D",
