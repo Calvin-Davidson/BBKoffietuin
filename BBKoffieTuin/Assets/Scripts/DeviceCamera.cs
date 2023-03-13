@@ -37,16 +37,12 @@ public class DeviceCamera : MonoBehaviour
 
     private IEnumerator TakePictureCoroutine()
     {
-        var perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
-
-        if (perm == NativeGallery.Permission.ShouldAsk)
+        var perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Write, NativeGallery.MediaType.Image);
+        if (perm == NativeGallery.Permission.Denied)
         {
-            NativeGallery.RequestPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
+            gameObject.SetActive(false);
+            yield break;
         }
-       
-        perm = NativeGallery.CheckPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
-
-        if (perm == NativeGallery.Permission.Denied) yield break;
         
        yield return new WaitForEndOfFrame();
         
