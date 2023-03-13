@@ -16,8 +16,8 @@ namespace Toolbox.MethodExtensions
         {
             return target.Count == 0;
         }
-        
-        
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -69,6 +69,19 @@ namespace Toolbox.MethodExtensions
         public static List<TU> ConvertListItemsTo<TY, TU>(this IList<TY> oldList) where TU : class
         {
             return oldList.Select(oldItem => oldItem as TU).ToList();
+        }
+
+        public static List<T> Shuffle<T>(this IList<T> oldList)
+        {
+            Random random = new Random();
+            int n = oldList.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                (oldList[k], oldList[n]) = (oldList[n], oldList[k]);
+            }
+            return oldList.ToList();
         }
     }
 }

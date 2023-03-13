@@ -19,7 +19,7 @@
       "AudioPaths": [
         "Audio/IntroParts/A_Fenna_de_bosfee_Intro"
       ],
-      "MiniGameOptions": 0
+      "MiniGameOption": 0
     },
     {
       "pointName": "B",
@@ -29,9 +29,8 @@
         "altitude": 0.0
       },
       "AudioPaths": [
-        "Audio/GameParts/A_PictureIntro"
       ],
-      "MiniGameOptions": 1
+      "MiniGameOption": 3
     },
     {
       "pointName": "C",
@@ -41,9 +40,8 @@
         "altitude": 0.0
       },
       "AudioPaths": [
-        "Audio/GameParts/A_ScavengerHuntIntro"
       ],
-      "MiniGameOptions": 0
+      "MiniGameOption": 1
     },
     {
       "pointName": "D",
@@ -53,7 +51,7 @@
         "altitude": 0.0
       },
       "AudioPaths": [],
-      "MiniGameOptions": 0
+      "MiniGameOption": 2
     },
     {
       "pointName": "E",
@@ -65,7 +63,7 @@
       "AudioPaths": [
         "Audio/GameParts/A_StoryTellingIntro"
       ],
-      "MiniGameOptions": 0  
+      "MiniGameOption": 0  
     }
   ]
 }
