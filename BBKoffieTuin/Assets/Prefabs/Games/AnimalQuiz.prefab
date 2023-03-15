@@ -1717,8 +1717,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60018272deda374586b93d45d3b9cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clips: []
-  QuizManager: {fileID: 0}
+  Clips:
+  - AnswersCorrect: 0
+    Clip: {fileID: 8300000, guid: 3526c75ce9e2bda43a1bccda2a6e2a8e, type: 3}
+  - AnswersCorrect: 1
+    Clip: {fileID: 8300000, guid: 2b599c85680af2e469807b1273436079, type: 3}
+  - AnswersCorrect: 2
+    Clip: {fileID: 8300000, guid: 58d670b24d9d5954592ceeed74ddf9ca, type: 3}
+  - AnswersCorrect: 2
+    Clip: {fileID: 8300000, guid: 3ef8ca13041141643addc7fbdb5244d1, type: 3}
+  QuizManager: {fileID: 1580384751607836485}
   onComplete:
     m_PersistentCalls:
       m_Calls: []
