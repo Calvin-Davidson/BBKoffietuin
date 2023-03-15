@@ -20,6 +20,6 @@ public class QuizGameResultRenderer : MonoBehaviour
 
     private void HandleQuizComplete(int correctAnswers)
     {
-        image.sprite = facialSprite[correctAnswers-1];
+        image.sprite = facialSprite[correctAnswers];
     }
 }
