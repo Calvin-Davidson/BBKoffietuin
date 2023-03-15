@@ -548,6 +548,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6163835184551825818, guid: 1947cd670a194ab4598881ab3581dc2a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1947cd670a194ab4598881ab3581dc2a, type: 3}
 --- !u!1 &3510075389352421092 stripped
@@ -556,6 +561,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 451008225555079995}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8407063050070104990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510075389352421092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c612e1aede288894eb164dd52bf3e766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 1619c8bec6378fe4d903cdcf2db9d2e7, type: 3}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  playOnAwake: 1
 --- !u!4 &5093631863711043921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4679937816978190954, guid: 1947cd670a194ab4598881ab3581dc2a,
@@ -573,7 +595,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 4f63b82e7b15e4b48b4c5d29ebbdfc19,
+        type: 3}
     - target: {fileID: 2667968823184963379, guid: ccf068f53199a784bbfa183451984836,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -615,10 +638,25 @@ PrefabInstance:
       propertyPath: clip
       value: 
       objectReference: {fileID: 8300000, guid: 8d0e5804d1560904f8098a68c09c9dc8, type: 3}
+    - target: {fileID: 3195129937819849902, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -162.02998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307640246845840480, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3959798147295495647, guid: ccf068f53199a784bbfa183451984836,
         type: 3}
       propertyPath: m_Name
       value: GameTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546878406546377598, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.49998
       objectReference: {fileID: 0}
     - target: {fileID: 4679937816978190954, guid: ccf068f53199a784bbfa183451984836,
         type: 3}
@@ -680,6 +718,16 @@ PrefabInstance:
       propertyPath: m_text
       value: Maak een foto!
       objectReference: {fileID: 0}
+    - target: {fileID: 4887394378971331606, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 274
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533140698100166114, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 125.500015
+      objectReference: {fileID: 0}
     - target: {fileID: 6760853716482058254, guid: ccf068f53199a784bbfa183451984836,
         type: 3}
       propertyPath: m_Sprite
@@ -689,6 +737,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
+      objectReference: {fileID: 21300000, guid: 2a79947bf8805c241b0b180eb0bf152f,
+        type: 3}
+    - target: {fileID: 8678253227069094483, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccf068f53199a784bbfa183451984836, type: 3}

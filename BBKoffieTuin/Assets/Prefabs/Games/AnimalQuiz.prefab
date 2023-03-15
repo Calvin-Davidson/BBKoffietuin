@@ -1530,6 +1530,8 @@ GameObject:
   - component: {fileID: 4541240133960384794}
   - component: {fileID: 1580384751607836485}
   - component: {fileID: 475315789582912363}
+  - component: {fileID: 3332342928842224930}
+  - component: {fileID: 1240132194583404751}
   m_Layer: 5
   m_Name: AnimalQuiz
   m_TagString: Untagged
@@ -1644,7 +1646,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: a9d1aaeaa8e5a4e40a4835f6da6cbff2, type: 3}
   - question: Op welk plaatje is een spin te zien
     sprite: {fileID: 21300000, guid: b593d5f1e1ac7fc418cda1c605a63389, type: 3}
-  - question: Op welk plaatje is een worm te zien
+  - question: Op welk plaatje is een rups te zien
     sprite: {fileID: 21300000, guid: 494d55af5a9f88347937846dbc828954, type: 3}
   - question: Op welk plaatje is een slak te zien
     sprite: {fileID: 21300000, guid: ee7a7b6615ce2d94abfdc7dcca7f2d4c, type: 3}
@@ -1703,6 +1705,50 @@ MonoBehaviour:
   onRenderComplete:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3332342928842224930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572451141585066201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60018272deda374586b93d45d3b9cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clips:
+  - AnswersCorrect: 0
+    Clip: {fileID: 8300000, guid: 3526c75ce9e2bda43a1bccda2a6e2a8e, type: 3}
+  - AnswersCorrect: 1
+    Clip: {fileID: 8300000, guid: 2b599c85680af2e469807b1273436079, type: 3}
+  - AnswersCorrect: 2
+    Clip: {fileID: 8300000, guid: 58d670b24d9d5954592ceeed74ddf9ca, type: 3}
+  - AnswersCorrect: 3
+    Clip: {fileID: 8300000, guid: 3ef8ca13041141643addc7fbdb5244d1, type: 3}
+  QuizManager: {fileID: 1580384751607836485}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1240132194583404751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572451141585066201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9ebb91c43c90b43b3a13135a33c117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quizManager: {fileID: 1580384751607836485}
+  image: {fileID: 5013105128578953977}
+  facialSprite:
+  - {fileID: 21300000, guid: eff5347eeee436c48a58c67ae464086f, type: 3}
+  - {fileID: 21300000, guid: f48d12e569375ad489327f11af5bb576, type: 3}
+  - {fileID: 21300000, guid: 4b974feaa9c1d6f45ab244890270a1f9, type: 3}
+  - {fileID: 21300000, guid: 4b974feaa9c1d6f45ab244890270a1f9, type: 3}
 --- !u!1 &7739583339379722738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,6 +2034,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
+      objectReference: {fileID: 21300000, guid: 3cf9dc105c97e9d498ea7850a8b22c3b,
+        type: 3}
+    - target: {fileID: 2860754621609581519, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f880ca32f245d2c4cadd12d0c06473e7, type: 3}
+    - target: {fileID: 3195129937819849902, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -144.49995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307640246845840480, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3959798147295495647, guid: ccf068f53199a784bbfa183451984836,
         type: 3}
@@ -1998,6 +2060,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546878406546377598, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.0300426
       objectReference: {fileID: 0}
     - target: {fileID: 4679937816978190954, guid: ccf068f53199a784bbfa183451984836,
         type: 3}
@@ -2054,6 +2121,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4887394378971331606, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 291
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533140698100166114, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 142.50003
+      objectReference: {fileID: 0}
     - target: {fileID: 6760853716482058254, guid: ccf068f53199a784bbfa183451984836,
         type: 3}
       propertyPath: m_Sprite
@@ -2063,6 +2140,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
+      objectReference: {fileID: 21300000, guid: 969130b209dd2cc45b4418a3310da990,
+        type: 3}
+    - target: {fileID: 8678253227069094483, guid: ccf068f53199a784bbfa183451984836,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccf068f53199a784bbfa183451984836, type: 3}
@@ -2210,7 +2293,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2860754621609581519, guid: 1947cd670a194ab4598881ab3581dc2a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1947cd670a194ab4598881ab3581dc2a, type: 3}
 --- !u!4 &3072593001033900270 stripped
 Transform:
@@ -2218,6 +2302,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7662436783226671748}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5013105128578953977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3441965238746865789, guid: 1947cd670a194ab4598881ab3581dc2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7662436783226671748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6675028196629452635 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3959798147295495647, guid: 1947cd670a194ab4598881ab3581dc2a,
