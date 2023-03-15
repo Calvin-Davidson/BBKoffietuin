@@ -74,7 +74,6 @@ namespace Route
 
         public void InitializeRoute()
         {
-            Debug.Log("INITIALZIE");
             //if the route code is smaller then the code size, fill it with random characters
             if (RouteCode.Count < CodeSize)
             {
