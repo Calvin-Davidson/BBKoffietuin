@@ -7,13 +7,6 @@ namespace Quiz
 {
     public class QuizCompleteAudioPlayer : MonoBehaviour
     {
-        [System.Serializable]
-        public struct AnswerClip
-        {
-            public int AnswersCorrect;
-            public AudioClip clip;
-        }
-
         public AnswerClip[] clips;
         public QuizManager quizManager;
         
@@ -29,14 +22,14 @@ namespace Quiz
         
         private void HandleClipComplete(AudioClip audioClip)
         {
-            if (audioClip == _clipPlaying.clip) onComplete?.Invoke();
+            if (audioClip == _clipPlaying.Clip) onComplete?.Invoke();
         }
 
         private void HandleQuizComplete(int correctAnswers)
         {
             AnswerClip clip = clips.FirstOrDefault(answerClip => answerClip.AnswersCorrect == correctAnswers);
             _clipPlaying = clip;
-            AudioManager.Instance.Play(clip.clip);
+            AudioManager.Instance.Play(clip.Clip);
         }
     }
 }
