@@ -1724,7 +1724,7 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 2b599c85680af2e469807b1273436079, type: 3}
   - AnswersCorrect: 2
     Clip: {fileID: 8300000, guid: 58d670b24d9d5954592ceeed74ddf9ca, type: 3}
-  - AnswersCorrect: 2
+  - AnswersCorrect: 3
     Clip: {fileID: 8300000, guid: 3ef8ca13041141643addc7fbdb5244d1, type: 3}
   QuizManager: {fileID: 1580384751607836485}
   onComplete:
