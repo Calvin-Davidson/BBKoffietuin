@@ -33,8 +33,7 @@ namespace Quiz
 
         private void DoNextQuestion()
         {
-            QuizQuestion nextQuestions =
-                questions.Where(question => !_previousQuestions.Contains(question)).ToList().Shuffle().First();
+            QuizQuestion nextQuestions = questions.Where(question => !_previousQuestions.Contains(question)).ToList().Shuffle().First();
 
             _previousQuestions.Add(nextQuestions);
             onNewQuestion?.Invoke(nextQuestions);

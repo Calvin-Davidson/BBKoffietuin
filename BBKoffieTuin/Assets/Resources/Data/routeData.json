@@ -18,7 +18,7 @@
       },
       "AudioPaths": [
         "Audio/IntroParts/A_Fenna_de_bosfee_Intro"
-      ]
+      ],
     },
     {
       "pointName": "B",
@@ -29,7 +29,7 @@
       },
       "AudioPaths": [
         "Audio/GameParts/A_PictureIntro"
-      ]
+      ],
     },
     {
       "pointName": "C",
@@ -69,7 +69,7 @@
         "longitude":  5.959154488736429,
         "altitude": 0.0
       },
-      "AudioPaths": []
+      "AudioPaths": [],
     }
   ]
 }

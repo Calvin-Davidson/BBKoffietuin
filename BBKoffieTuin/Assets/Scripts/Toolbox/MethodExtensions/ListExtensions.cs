@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Random = System.Random;
+using Unity.VisualScripting.FullSerializer;
+using UnityEngine;
 
 namespace Toolbox.MethodExtensions
 {
     public static class ListExtensions
     {
         /// <summary>
-        /// Checks if the list is empty 
+        /// Checks if the list is empty
         /// </summary>
         /// <param name="target"></param>
         /// <typeparam name="T"></typeparam>
@@ -19,7 +20,7 @@ namespace Toolbox.MethodExtensions
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="list"></param>
         /// <param name="index"></param>
@@ -34,7 +35,7 @@ namespace Toolbox.MethodExtensions
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="list"></param>
         /// <param name="index"></param>
@@ -61,7 +62,7 @@ namespace Toolbox.MethodExtensions
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="oldList"></param>
         /// <typeparam name="TY"></typeparam>
@@ -71,17 +72,51 @@ namespace Toolbox.MethodExtensions
             return oldList.Select(oldItem => oldItem as TU).ToList();
         }
 
-        public static List<T> Shuffle<T>(this IList<T> oldList)
+
+        /// <summary>
+        /// Gets a new list with random items from the given list
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="list"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static List<T> GetRandomItems<T>(this List<T> list, int amount)
         {
-            Random random = new Random();
-            int n = oldList.Count;
+            var resultList = new List<T>();
+            var duplicateList = new List<T>(list);
+
+            for (int i = 0; i < amount; i++)
+            {
+                //random index
+                var randomIndex = Random.Range(0, duplicateList.Count);
+                //get item from random index
+                var randomItem = duplicateList[randomIndex];
+                //add item to result list
+                resultList.Add(randomItem);
+                //remove item from duplicate list
+                duplicateList.RemoveAt(randomIndex);
+            }
+
+            return resultList;
+        }
+
+        /// <summary>
+        /// Shuffle the list 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <typeparam name="T"></typeparam>
+        public static List<T> Shuffle<T>(this IList<T> list)
+        {
+            System.Random rnd = new();
+            int n = list.Count;
             while (n > 1)
             {
                 n--;
-                int k = random.Next(n + 1);
-                (oldList[k], oldList[n]) = (oldList[n], oldList[k]);
+                int k = rnd.Next(n + 1);
+                (list[k], list[n]) = (list[n], list[k]);
             }
-            return oldList.ToList();
+
+            return list.ToList();
         }
     }
 }

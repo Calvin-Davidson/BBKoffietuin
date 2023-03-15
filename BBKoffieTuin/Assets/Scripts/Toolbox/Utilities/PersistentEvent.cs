@@ -8,7 +8,11 @@ namespace Toolbox.Utilities
     {
         private Action _action;
 
-        public Action Action => _action;
+        public Action Action
+        {
+            get => _action;
+            set => _action = value;
+        }
 
         public void Invoke()
         {
