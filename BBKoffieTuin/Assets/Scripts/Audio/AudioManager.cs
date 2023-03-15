@@ -47,7 +47,7 @@ namespace Audio
         private void Update()
         {
             if (_audioSource.clip == null) return;
-            if (!_audioSource.isPlaying && Math.Abs(_audioSource.time - _audioSource.clip.length) < 0.01)
+            if (!_audioSource.isPlaying && Math.Abs(_audioSource.time - _audioSource.clip.length) < 0.05)
             {
                 onClipComplete?.Invoke(_audioSource.clip);
             }
