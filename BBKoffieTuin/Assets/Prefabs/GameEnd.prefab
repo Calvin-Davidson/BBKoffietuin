@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Animal quiz!
+  m_text: Goed gedaan, je hebt de game voltooid.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a2fcf1546328d144910da7624ff7e80, type: 2}
   m_sharedMaterial: {fileID: 6000823453954233664, guid: 3a2fcf1546328d144910da7624ff7e80,
