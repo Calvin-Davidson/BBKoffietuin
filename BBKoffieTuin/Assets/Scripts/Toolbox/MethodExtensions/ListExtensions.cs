@@ -99,5 +99,24 @@ namespace Toolbox.MethodExtensions
 
             return resultList;
         }
+
+        /// <summary>
+        /// Shuffle the list 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <typeparam name="T"></typeparam>
+        public static List<T> Shuffle<T>(this IList<T> list)
+        {
+            System.Random rnd = new();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rnd.Next(n + 1);
+                (list[k], list[n]) = (list[n], list[k]);
+            }
+
+            return list.ToList();
+        }
     }
 }
