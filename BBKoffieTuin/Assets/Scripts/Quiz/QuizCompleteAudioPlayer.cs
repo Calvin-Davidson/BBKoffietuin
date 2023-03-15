@@ -7,8 +7,8 @@ namespace Quiz
 {
     public class QuizCompleteAudioPlayer : MonoBehaviour
     {
-        public AnswerClip[] clips;
-        public QuizManager quizManager;
+        public AnswerClip[] Clips;
+        public QuizManager QuizManager;
         
         private AnswerClip _clipPlaying;
 
@@ -17,7 +17,7 @@ namespace Quiz
         private void Awake()
         {
             AudioManager.Instance.onClipComplete.AddListener(HandleClipComplete);
-            quizManager.onGameComplete.AddListener(HandleQuizComplete);
+            QuizManager.onGameComplete.AddListener(HandleQuizComplete);
         }
         
         private void HandleClipComplete(AudioClip audioClip)
@@ -27,7 +27,7 @@ namespace Quiz
 
         private void HandleQuizComplete(int correctAnswers)
         {
-            AnswerClip clip = clips.FirstOrDefault(answerClip => answerClip.AnswersCorrect == correctAnswers);
+            AnswerClip clip = Clips.FirstOrDefault(answerClip => answerClip.AnswersCorrect == correctAnswers);
             _clipPlaying = clip;
             AudioManager.Instance.Play(clip.Clip);
         }
