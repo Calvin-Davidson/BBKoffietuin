@@ -739,6 +739,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8697524716620350505, guid: 49950662c5c894848a668b16bc36f475,
+        type: 3}
+      propertyPath: m_text
+      value: Voor deze applicatie heb we toegang nodig tot de locatie van de telefoon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49950662c5c894848a668b16bc36f475, type: 3}
 --- !u!1 &128075384
@@ -2204,8 +2209,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ab2433fab47ec654a9ae67c16929556b, type: 3}
   - {fileID: 8300000, guid: a77cd1ff52a091f4ba04758c68663ee7, type: 3}
   - {fileID: 8300000, guid: d3037d9cb64547a4aa40b191ebbedb6b, type: 3}
-  miniGameCompleteEvent: {fileID: 11400000, guid: 6997840a49525df48bcb4aa37f4698d2,
-    type: 2}
 --- !u!1 &923083303
 GameObject:
   m_ObjectHideFlags: 0
