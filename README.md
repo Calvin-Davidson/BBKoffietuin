@@ -8,15 +8,32 @@ Wat wij hiermee willen bereiken is een volledige ervaring waar het kind continue
 ## Geproduceerde Game Onderdelen
 
 Calvin: Lead developer
+- minigames
+- intro menu
 
 Emile: Developer
+- map webtool
+- audio system
+- wiki -> pipeline
 
 Wouter: Notulist
+- kompas
+- wiki -> pipeline, functioneel ontwerp, technisch ontwerp
+- tree shader
 
 Vivian: Scrum master
+- UI buttons
+- fog shader
 
 Sterre: Lead artist
+- map
+- bomen
+- insecten
 
 Leihko: Project owner
+- characters -> bosfee, bos
+- tutorial panels
 
 Larhona: Artist
+- kompas
+- audio UI
