@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using File = System.IO.File;
 
@@ -11,6 +12,8 @@ public class DeviceCamera : MonoBehaviour
 
     private WebCamTexture _webCamTexture;
 
+    public UnityEvent onPictureComplete = new();
+    
     private void Start()
     {
         StartWebCam();
@@ -57,7 +60,7 @@ public class DeviceCamera : MonoBehaviour
 
         NativeGallery.SaveImageToGallery(bytes, "BBStories", pictureName, (success, path) =>
         {
-            gameObject.SetActive(false);
+            onPictureComplete?.Invoke();
         });
     }
 }

@@ -24,14 +24,14 @@ namespace Route
         private void OnEnable()
         {
             routeHandler.onRouteChanged.AddListener(InitializeMap);
-            PhoneDirection.Instance.onNortherPointChange.AddListener(UpdateUserRotation);
+            PhoneDirection.Instance.onTargetPointChange.AddListener(UpdateUserRotation);
             InitializeMap();
         }
 
         private void OnDisable()
         {
             routeHandler.onRouteChanged.RemoveListener(InitializeMap);
-            PhoneDirection.Instance.onNortherPointChange.RemoveListener(UpdateUserRotation);
+            PhoneDirection.Instance.onTargetPointChange.RemoveListener(UpdateUserRotation);
         }
 
         private void Update()
@@ -160,7 +160,7 @@ namespace Route
         /// <param name="newRotation"></param>
         private void UpdateUserRotation(float newRotation)
         {
-            _userRect.rotation = Quaternion.Euler(new Vector3(0,0,newRotation));
+            _userRect.rotation = Quaternion.Euler(new Vector3(0,0,newRotation - 180));
         }
 
         /// <summary>
